@@ -13,6 +13,90 @@ const Calculators = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <style>{`
+        /* Custom Scrollbar Styles */
+        .calculator-content::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        
+        .calculator-content::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 10px;
+        }
+        
+        .calculator-content::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #3b82f6, #2563eb);
+          border-radius: 10px;
+        }
+        
+        .calculator-content::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #2563eb, #1d4ed8);
+        }
+
+        /* Firefox */
+        .calculator-content {
+          scrollbar-width: thin;
+          scrollbar-color: #3b82f6 #f1f5f9;
+        }
+
+        /* Smooth scrolling */
+        .calculator-content {
+          scroll-behavior: smooth;
+        }
+
+        /* Custom Range Slider Styles */
+        input[type="range"] {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 6px;
+          border-radius: 5px;
+          background: linear-gradient(to right, #3b82f6 0%, #3b82f6 50%, #e5e7eb 50%, #e5e7eb 100%);
+          outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #3b82f6;
+          cursor: pointer;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+          background: #2563eb;
+          transform: scale(1.1);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #3b82f6;
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+          background: #2563eb;
+          transform: scale(1.1);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="range"]::-moz-range-track {
+          background: #e5e7eb;
+          border-radius: 5px;
+          height: 6px;
+        }
+      `}</style>
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -97,7 +181,7 @@ const Calculators = () => {
           </div>
 
           {/* Calculator Content */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 calculator-content">
             {activeCalculator === 'emi' && <EMICalculator />}
             {activeCalculator === 'sip' && <SIPCalculator />}
             {activeCalculator === 'emergency' && <EmergencyFundCalculator />}

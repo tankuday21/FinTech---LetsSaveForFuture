@@ -138,31 +138,20 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600 mb-1">Current Streak</p>
-                <p className="text-3xl font-bold text-orange-600">
-                  {loading ? '...' : userProgress.current_streak || 0}
-                </p>
-              </div>
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                <span className="text-2xl">🔥</span>
-              </div>
+          {/* Streak Card - Compact Version */}
+          <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl shadow-sm p-6 border-2 border-orange-200">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm text-gray-600">Current Streak</p>
+              <span className="text-2xl">🔥</span>
             </div>
+            <p className="text-3xl font-bold text-orange-600 mb-1">
+              {loading ? '...' : userProgress.current_streak || 0}
+            </p>
+            <p className="text-xs text-gray-600">
+              {userProgress.current_streak === 1 ? 'day' : 'days'} • Best: {userProgress.longest_streak || 0}
+            </p>
           </div>
         </div>
-
-        {/* Streak Display */}
-        {!loading && (
-          <div className="mb-8">
-            <StreakDisplay 
-              currentStreak={userProgress.current_streak || 0}
-              longestStreak={userProgress.longest_streak || 0}
-              size="large"
-            />
-          </div>
-        )}
 
         {/* Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

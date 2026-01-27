@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getUserProgress, getModuleCompletions } from '../services/progressService';
 import { supabase } from '../services/supabase';
+import StreakDisplay from '../components/StreakDisplay';
 import { 
   HiUser, 
   HiEnvelope, 
@@ -321,6 +322,15 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Daily Streak - Large Display */}
+            <div>
+              <StreakDisplay 
+                currentStreak={userProgress.current_streak || 0}
+                longestStreak={userProgress.longest_streak || 0}
+                size="large"
+              />
             </div>
 
             {/* Recent Activity */}
