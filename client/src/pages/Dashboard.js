@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
-import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap } from 'react-icons/hi2';
+import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar } from 'react-icons/hi2';
+import { getUserProgress } from '../services/progressService';
 
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [userProgress, setUserProgress] = useState({ total_points: 0, modules_completed: 0 });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProgress = async () => {
+      if (!user) return;
+      
+      try {
+        const progress = await getUserProgress(user.id);
+        setUserProgress(progress);
+      } catch (error) {
+        console.error('Error loading progress:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProgress();
+  }, [user]);
 
   const handleLogout = async () => {
     try {
@@ -69,7 +89,52 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* Dashboard content will be added here */}
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Total Points</p>
+                <p className="text-3xl font-bold text-primary-600">
+                  {loading ? '...' : userProgress.total_points}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                <HiStar className="w-6 h-6 text-primary-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Modules Completed</p>
+                <p className="text-3xl font-bold text-green-600">
+                  {loading ? '...' : `${userProgress.modules_completed}/24`}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <HiAcademicCap className="w-6 h-6 text-green-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Progress</p>
+                <p className="text-3xl font-bold text-accent-600">
+                  {loading ? '...' : `${Math.round((userProgress.modules_completed / 24) * 100)}%`}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                <HiChartBar className="w-6 h-6 text-accent-600" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Link to="/learn" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-primary-300 transition-all">
             <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">

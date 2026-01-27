@@ -1,10 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { learningModules, getLevelColor, getModuleIcon } from '../data/modules';
 import { HiLockClosed, HiClock, HiStar, HiCheckCircle } from 'react-icons/hi2';
+import { useAuth } from '../context/AuthContext';
+import { getUserProgress, getModuleCompletions, canAccessModule } from '../services/progressService';
 
 const Learn = () => {
+  const { user } = useAuth();
   const [selectedLevel, setSelectedLevel] = useState(null);
+  const [userProgress, setUserProgress] = useState({ total_points: 0, modules_completed: 0 });
+  const [completedModules, setCompletedModules] = useState([]);
+  const [moduleAccess, setModuleAccess] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProgress = async () => {
+      if (!user) return;
+
+      try {
+        // Load user progress and module completions
+        const [progress, completions] = await Promise.all([
+          getUserProgress(user.id),
+          getModuleCompletions(user.id)
+        ]);
+
+        setUserProgress(progress);
+        setCompletedModules(completions.map(c => c.module_id));
+
+        // Check access for all modules
+        const allModules = learningModules.flatMap(level => level.modules);
+        const accessMap = {};
+        
+        for (const module of allModules) {
+          accessMap[module.id] = await canAccessModule(user.id, module.id);
+        }
+        
+        setModuleAccess(accessMap);
+      } catch (error) {
+        console.error('Error loading progress:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProgress();
+  }, [user]);
+
+  const totalModules = learningModules.reduce((sum, level) => sum + level.modules.length, 0);
+  const progressPercentage = totalModules > 0 ? (userProgress.modules_completed / totalModules) * 100 : 0;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading your progress...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -30,15 +84,20 @@ const Learn = () => {
               <p className="text-sm text-gray-600">Keep learning to unlock new modules</p>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-bold text-primary-600">0/24</div>
+              <div className="text-3xl font-bold text-primary-600">
+                {userProgress.modules_completed}/{totalModules}
+              </div>
               <div className="text-sm text-gray-600">Modules Completed</div>
             </div>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
-            <div className="bg-primary-600 h-3 rounded-full" style={{ width: '0%' }}></div>
+            <div 
+              className="bg-primary-600 h-3 rounded-full transition-all duration-500" 
+              style={{ width: `${progressPercentage}%` }}
+            ></div>
           </div>
           <div className="mt-4 flex items-center justify-between text-sm">
-            <span className="text-gray-600">0 Points Earned</span>
+            <span className="text-gray-600">{userProgress.total_points} Points Earned</span>
             <span className="text-gray-600">5,000 Total Points</span>
           </div>
         </div>
@@ -48,8 +107,8 @@ const Learn = () => {
           {learningModules.map((level) => {
             const colors = getLevelColor(level.color);
             const isExpanded = selectedLevel === level.level;
-            const completedModules = level.modules.filter(m => !m.locked).length;
-            const totalModules = level.modules.length;
+            const levelCompletedModules = level.modules.filter(m => completedModules.includes(m.id)).length;
+            const levelTotalModules = level.modules.length;
 
             return (
               <div key={level.level} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -77,7 +136,7 @@ const Learn = () => {
                         </div>
                         <div className="flex items-center space-x-1">
                           <HiCheckCircle className="w-4 h-4" />
-                          <span>{completedModules}/{totalModules} Modules</span>
+                          <span>{levelCompletedModules}/{levelTotalModules} Modules</span>
                         </div>
                       </div>
                     </div>
@@ -101,7 +160,13 @@ const Learn = () => {
                   <div className="p-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {level.modules.map((module) => (
-                        <ModuleCard key={module.id} module={module} colors={colors} />
+                        <ModuleCard 
+                          key={module.id} 
+                          module={module} 
+                          colors={colors}
+                          isCompleted={completedModules.includes(module.id)}
+                          isLocked={!moduleAccess[module.id]}
+                        />
                       ))}
                     </div>
                   </div>
@@ -115,21 +180,23 @@ const Learn = () => {
   );
 };
 
-const ModuleCard = ({ module, colors }) => {
+const ModuleCard = ({ module, colors, isCompleted, isLocked }) => {
   const IconComponent = getModuleIcon(module.icon);
   
   return (
     <Link
-      to={module.locked ? '#' : `/learn/module/${module.id}`}
-      className={`block relative border ${colors.border} rounded-lg p-5 hover:shadow-md transition-all ${module.locked ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-primary-300'}`}
-      onClick={(e) => module.locked && e.preventDefault()}
+      to={isLocked ? '#' : `/learn/module/${module.id}`}
+      className={`block relative border ${colors.border} rounded-lg p-5 hover:shadow-md transition-all ${isLocked ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-primary-300'} ${isCompleted ? 'bg-green-50' : ''}`}
+      onClick={(e) => isLocked && e.preventDefault()}
     >
-      {/* Lock Overlay */}
-      {module.locked && (
-        <div className="absolute top-3 right-3">
+      {/* Lock or Completed Badge */}
+      <div className="absolute top-3 right-3">
+        {isCompleted ? (
+          <HiCheckCircle className="w-6 h-6 text-green-600" />
+        ) : isLocked ? (
           <HiLockClosed className="w-5 h-5 text-gray-400" />
-        </div>
-      )}
+        ) : null}
+      </div>
 
       {/* Module Icon */}
       <div className={`w-12 h-12 ${colors.icon} rounded-lg flex items-center justify-center mb-3`}>
@@ -168,10 +235,10 @@ const ModuleCard = ({ module, colors }) => {
         )}
       </div>
 
-      {/* Start Button */}
-      {!module.locked && (
+      {/* Start/Continue Button */}
+      {!isLocked && (
         <div className="mt-4 w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-center">
-          Start Learning
+          {isCompleted ? 'Review Module' : 'Start Learning'}
         </div>
       )}
     </Link>

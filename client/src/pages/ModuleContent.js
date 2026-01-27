@@ -5,13 +5,17 @@ import { moduleContent } from '../data/moduleContent';
 import Quiz from '../components/Quiz';
 import QuizResults from '../components/QuizResults';
 import { HiArrowLeft, HiArrowRight, HiCheckCircle } from 'react-icons/hi2';
+import { useAuth } from '../context/AuthContext';
+import { completeModule } from '../services/progressService';
 
 const ModuleContent = () => {
   const { moduleId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [currentSection, setCurrentSection] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizScore, setQuizScore] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   // Find the module
   const module = learningModules
@@ -66,9 +70,23 @@ const ModuleContent = () => {
     }
   };
 
-  const handleQuizComplete = (score, total) => {
+  const handleQuizComplete = async (score, total) => {
     setQuizScore({ score, total });
     window.scrollTo(0, 0);
+
+    // Save progress if quiz passed (70% or higher)
+    const percentage = (score / total) * 100;
+    if (percentage >= 70 && user) {
+      setSaving(true);
+      try {
+        await completeModule(user.id, parseInt(moduleId), score, total, module.points);
+        console.log('Module completion saved successfully!');
+      } catch (error) {
+        console.error('Error saving module completion:', error);
+      } finally {
+        setSaving(false);
+      }
+    }
   };
 
   const handleContinue = () => {
@@ -130,11 +148,20 @@ const ModuleContent = () => {
 
         {/* Quiz Results */}
         {quizScore !== null ? (
-          <QuizResults
-            score={quizScore.score}
-            totalQuestions={quizScore.total}
-            onContinue={handleContinue}
-          />
+          <>
+            {saving && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4 flex items-center space-x-3">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                <span className="text-blue-700">Saving your progress...</span>
+              </div>
+            )}
+            <QuizResults
+              score={quizScore.score}
+              totalQuestions={quizScore.total}
+              onContinue={handleContinue}
+              pointsEarned={module.points}
+            />
+          </>
         ) : showQuiz ? (
           /* Quiz */
           <Quiz

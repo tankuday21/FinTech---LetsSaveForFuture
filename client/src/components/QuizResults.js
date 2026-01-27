@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiTrophy, HiStar, HiCheckCircle } from 'react-icons/hi2';
 
-const QuizResults = ({ score, totalQuestions, onContinue }) => {
+const QuizResults = ({ score, totalQuestions, onContinue, pointsEarned = 100 }) => {
   const percentage = (score / totalQuestions) * 100;
   const passed = percentage >= 70;
 
@@ -66,7 +66,7 @@ const QuizResults = ({ score, totalQuestions, onContinue }) => {
             <span className="font-semibold text-green-900">Module Completed!</span>
           </div>
           <p className="text-sm text-green-700">
-            You've earned <span className="font-bold">100 points</span> and unlocked the next module!
+            You've earned <span className="font-bold">{pointsEarned} points</span> and unlocked the next module!
           </p>
         </div>
       )}
