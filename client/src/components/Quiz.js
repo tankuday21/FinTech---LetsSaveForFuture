@@ -32,7 +32,8 @@ const Quiz = ({ questions, onComplete }) => {
 
   const handleNext = () => {
     if (isLastQuestion) {
-      onComplete(score + (selectedAnswer === question.correctAnswer ? 1 : 0), questions.length);
+      // Score was already updated in handleSubmit, just pass it
+      onComplete(score, questions.length);
     } else {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
