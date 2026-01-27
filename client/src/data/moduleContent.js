@@ -811,9 +811,7 @@ export const moduleContent = {
         }
       ]
     }
-  }
-};
-,
+  },
 
   // Module 3: Creating Your First Budget
   3: {
