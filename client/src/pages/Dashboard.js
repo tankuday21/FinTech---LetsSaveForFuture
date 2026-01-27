@@ -4,7 +4,6 @@ import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
 import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser, HiCalculator } from 'react-icons/hi2';
 import { getUserProgress } from '../services/progressService';
-import StreakDisplay from '../components/StreakDisplay';
 
 const Dashboard = () => {
   const { user } = useAuth();
