@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
-import { HiBookOpen, HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap } from 'react-icons/hi2';
+import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap } from 'react-icons/hi2';
 
 const Dashboard = () => {
   const { user } = useAuth();
