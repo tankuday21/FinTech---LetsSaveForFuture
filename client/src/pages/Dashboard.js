@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
 import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser, HiCalculator } from 'react-icons/hi2';
 import { getUserProgress } from '../services/progressService';
+import VersionBadge from '../components/VersionBadge';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -39,6 +40,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <VersionBadge />
       {/* Navigation */}
       <nav className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CustomSlider from '../components/CustomSlider';
+import VersionBadge from '../components/VersionBadge';
 import { 
   HiArrowLeft,
   HiCalculator,
@@ -13,90 +15,7 @@ const Calculators = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <style>{`
-        /* Custom Scrollbar Styles */
-        .calculator-content::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
-        }
-        
-        .calculator-content::-webkit-scrollbar-track {
-          background: #f1f5f9;
-          border-radius: 10px;
-        }
-        
-        .calculator-content::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, #3b82f6, #2563eb);
-          border-radius: 10px;
-        }
-        
-        .calculator-content::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(180deg, #2563eb, #1d4ed8);
-        }
-
-        /* Firefox */
-        .calculator-content {
-          scrollbar-width: thin;
-          scrollbar-color: #3b82f6 #f1f5f9;
-        }
-
-        /* Smooth scrolling */
-        .calculator-content {
-          scroll-behavior: smooth;
-        }
-
-        /* Custom Range Slider Styles */
-        input[type="range"] {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 100%;
-          height: 6px;
-          border-radius: 5px;
-          background: linear-gradient(to right, #3b82f6 0%, #3b82f6 50%, #e5e7eb 50%, #e5e7eb 100%);
-          outline: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 18px;
-          height: 18px;
-          border-radius: 50%;
-          background: #3b82f6;
-          cursor: pointer;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-          transition: all 0.2s ease;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-          background: #2563eb;
-          transform: scale(1.1);
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        input[type="range"]::-moz-range-thumb {
-          width: 18px;
-          height: 18px;
-          border-radius: 50%;
-          background: #3b82f6;
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-          transition: all 0.2s ease;
-        }
-
-        input[type="range"]::-moz-range-thumb:hover {
-          background: #2563eb;
-          transform: scale(1.1);
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        input[type="range"]::-moz-range-track {
-          background: #e5e7eb;
-          border-radius: 5px;
-          height: 6px;
-        }
-      `}</style>
+      <VersionBadge />
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -222,68 +141,38 @@ const EMICalculator = () => {
       <h2 className="text-2xl font-bold text-gray-900 mb-6">EMI Calculator</h2>
       
       <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Loan Amount (₹)
-          </label>
-          <input
-            type="number"
-            value={principal}
-            onChange={(e) => setPrincipal(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <input
-            type="range"
-            min="10000"
-            max="10000000"
-            step="10000"
-            value={principal}
-            onChange={(e) => setPrincipal(e.target.value)}
-            className="w-full mt-2"
-          />
-        </div>
+        <CustomSlider
+          label="Loan Amount"
+          value={principal}
+          onChange={setPrincipal}
+          min={10000}
+          max={10000000}
+          step={10000}
+          formatValue={(val) => `₹${val.toLocaleString('en-IN')}`}
+          color="primary"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Interest Rate (% per annum)
-          </label>
-          <input
-            type="number"
-            value={rate}
-            onChange={(e) => setRate(e.target.value)}
-            step="0.1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <input
-            type="range"
-            min="1"
-            max="20"
-            step="0.1"
-            value={rate}
-            onChange={(e) => setRate(e.target.value)}
-            className="w-full mt-2"
-          />
-        </div>
+        <CustomSlider
+          label="Interest Rate (% per annum)"
+          value={rate}
+          onChange={setRate}
+          min={1}
+          max={20}
+          step={0.1}
+          formatValue={(val) => `${val}%`}
+          color="green"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Loan Tenure (Years)
-          </label>
-          <input
-            type="number"
-            value={tenure}
-            onChange={(e) => setTenure(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <input
-            type="range"
-            min="1"
-            max="30"
-            value={tenure}
-            onChange={(e) => setTenure(e.target.value)}
-            className="w-full mt-2"
-          />
-        </div>
+        <CustomSlider
+          label="Loan Tenure (Years)"
+          value={tenure}
+          onChange={setTenure}
+          min={1}
+          max={30}
+          step={1}
+          formatValue={(val) => `${val} years`}
+          color="blue"
+        />
 
         <button
           onClick={calculateEMI}
@@ -348,68 +237,38 @@ const SIPCalculator = () => {
       <h2 className="text-2xl font-bold text-gray-900 mb-6">SIP Calculator</h2>
       
       <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Monthly Investment (₹)
-          </label>
-          <input
-            type="number"
-            value={monthly}
-            onChange={(e) => setMonthly(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <input
-            type="range"
-            min="500"
-            max="100000"
-            step="500"
-            value={monthly}
-            onChange={(e) => setMonthly(e.target.value)}
-            className="w-full mt-2"
-          />
-        </div>
+        <CustomSlider
+          label="Monthly Investment"
+          value={monthly}
+          onChange={setMonthly}
+          min={500}
+          max={100000}
+          step={500}
+          formatValue={(val) => `₹${val.toLocaleString('en-IN')}`}
+          color="primary"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Expected Return Rate (% per annum)
-          </label>
-          <input
-            type="number"
-            value={rate}
-            onChange={(e) => setRate(e.target.value)}
-            step="0.1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <input
-            type="range"
-            min="1"
-            max="30"
-            step="0.5"
-            value={rate}
-            onChange={(e) => setRate(e.target.value)}
-            className="w-full mt-2"
-          />
-        </div>
+        <CustomSlider
+          label="Expected Return Rate (% per annum)"
+          value={rate}
+          onChange={setRate}
+          min={1}
+          max={30}
+          step={0.5}
+          formatValue={(val) => `${val}%`}
+          color="green"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Investment Period (Years)
-          </label>
-          <input
-            type="number"
-            value={years}
-            onChange={(e) => setYears(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <input
-            type="range"
-            min="1"
-            max="40"
-            value={years}
-            onChange={(e) => setYears(e.target.value)}
-            className="w-full mt-2"
-          />
-        </div>
+        <CustomSlider
+          label="Investment Period (Years)"
+          value={years}
+          onChange={setYears}
+          min={1}
+          max={40}
+          step={1}
+          formatValue={(val) => `${val} years`}
+          color="blue"
+        />
 
         <button
           onClick={calculateSIP}
@@ -457,44 +316,38 @@ const EmergencyFundCalculator = () => {
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Emergency Fund Calculator</h2>
       
       <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Monthly Expenses (₹)
-          </label>
-          <input
-            type="number"
-            value={monthlyExpenses}
-            onChange={(e) => setMonthlyExpenses(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-        </div>
+        <CustomSlider
+          label="Monthly Expenses"
+          value={monthlyExpenses}
+          onChange={setMonthlyExpenses}
+          min={5000}
+          max={200000}
+          step={1000}
+          formatValue={(val) => `₹${val.toLocaleString('en-IN')}`}
+          color="primary"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Months of Coverage
-          </label>
-          <input
-            type="number"
-            value={months}
-            onChange={(e) => setMonths(e.target.value)}
-            min="3"
-            max="12"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-          <p className="text-xs text-gray-500 mt-1">Recommended: 3-6 months</p>
-        </div>
+        <CustomSlider
+          label="Months of Coverage"
+          value={months}
+          onChange={setMonths}
+          min={3}
+          max={12}
+          step={1}
+          formatValue={(val) => `${val} months`}
+          color="blue"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Current Savings (₹)
-          </label>
-          <input
-            type="number"
-            value={currentSavings}
-            onChange={(e) => setCurrentSavings(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-        </div>
+        <CustomSlider
+          label="Current Savings"
+          value={currentSavings}
+          onChange={setCurrentSavings}
+          min={0}
+          max={500000}
+          step={5000}
+          formatValue={(val) => `₹${val.toLocaleString('en-IN')}`}
+          color="green"
+        />
 
         <div className="mt-6 space-y-4">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
@@ -570,42 +423,38 @@ const CompoundInterestCalculator = () => {
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Compound Interest Calculator</h2>
       
       <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Principal Amount (₹)
-          </label>
-          <input
-            type="number"
-            value={principal}
-            onChange={(e) => setPrincipal(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-        </div>
+        <CustomSlider
+          label="Principal Amount"
+          value={principal}
+          onChange={setPrincipal}
+          min={10000}
+          max={10000000}
+          step={10000}
+          formatValue={(val) => `₹${val.toLocaleString('en-IN')}`}
+          color="primary"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Annual Interest Rate (%)
-          </label>
-          <input
-            type="number"
-            value={rate}
-            onChange={(e) => setRate(e.target.value)}
-            step="0.1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-        </div>
+        <CustomSlider
+          label="Annual Interest Rate"
+          value={rate}
+          onChange={setRate}
+          min={1}
+          max={20}
+          step={0.1}
+          formatValue={(val) => `${val}%`}
+          color="purple"
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Time Period (Years)
-          </label>
-          <input
-            type="number"
-            value={years}
-            onChange={(e) => setYears(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
-        </div>
+        <CustomSlider
+          label="Time Period (Years)"
+          value={years}
+          onChange={setYears}
+          min={1}
+          max={30}
+          step={1}
+          formatValue={(val) => `${val} years`}
+          color="blue"
+        />
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
