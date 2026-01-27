@@ -11,7 +11,7 @@
    git push origin main
    ```
 
-2. **Create vercel.json in root directory** (already done below)
+2. **No vercel.json needed!** Vercel auto-detects Create React App configuration.
 
 ### Step 2: Deploy Frontend (React App)
 
