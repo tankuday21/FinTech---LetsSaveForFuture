@@ -18,7 +18,14 @@ export const getUserProgress = async (userId) => {
       const { data: newProgress, error: insertError } = await supabase
         .from('user_progress')
         .insert([
-          { user_id: userId, total_points: 0, modules_completed: 0 }
+          { 
+            user_id: userId, 
+            total_points: 0, 
+            modules_completed: 0,
+            current_streak: 0,
+            longest_streak: 0,
+            last_activity_date: null
+          }
         ])
         .select()
         .single();
@@ -30,7 +37,13 @@ export const getUserProgress = async (userId) => {
     return data;
   } catch (error) {
     console.error('Error getting user progress:', error);
-    return { total_points: 0, modules_completed: 0 };
+    return { 
+      total_points: 0, 
+      modules_completed: 0,
+      current_streak: 0,
+      longest_streak: 0,
+      last_activity_date: null
+    };
   }
 };
 

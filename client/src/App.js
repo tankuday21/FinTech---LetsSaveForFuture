@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard';
 import Learn from './pages/Learn';
 import ModuleContent from './pages/ModuleContent';
 import Profile from './pages/Profile';
+import Leaderboard from './pages/Leaderboard';
+import Calculators from './pages/Calculators';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { testSupabaseConnection } from './utils/testSupabase';
 
@@ -74,6 +76,22 @@ function AnimatedRoutes() {
               element={
                 <PrivateRoute>
                   <Profile />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/leaderboard" 
+              element={
+                <PrivateRoute>
+                  <Leaderboard />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/calculators" 
+              element={
+                <PrivateRoute>
+                  <Calculators />
                 </PrivateRoute>
               } 
             />

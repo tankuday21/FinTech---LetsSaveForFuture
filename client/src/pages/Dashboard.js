@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
-import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser } from 'react-icons/hi2';
+import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser, HiCalculator } from 'react-icons/hi2';
 import { getUserProgress } from '../services/progressService';
+import StreakDisplay from '../components/StreakDisplay';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -94,7 +95,7 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
@@ -136,10 +137,35 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 mb-1">Current Streak</p>
+                <p className="text-3xl font-bold text-orange-600">
+                  {loading ? '...' : userProgress.current_streak || 0}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <span className="text-2xl">🔥</span>
+              </div>
+            </div>
+          </div>
         </div>
 
+        {/* Streak Display */}
+        {!loading && (
+          <div className="mb-8">
+            <StreakDisplay 
+              currentStreak={userProgress.current_streak || 0}
+              longestStreak={userProgress.longest_streak || 0}
+              size="large"
+            />
+          </div>
+        )}
+
         {/* Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Link to="/learn" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-primary-300 transition-all">
             <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
               <HiAcademicCap className="w-6 h-6 text-primary-600" />
@@ -158,21 +184,45 @@ const Dashboard = () => {
             </div>
           </Link>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+          <Link to="/leaderboard" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-accent-300 transition-all">
             <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
               <HiTrophy className="w-6 h-6 text-accent-600" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Challenges
+              Leaderboard
             </h3>
-            <p className="text-gray-600 text-sm">
-              Coming soon...
+            <p className="text-gray-600 text-sm mb-4">
+              See how you rank against others
             </p>
-          </div>
+            <div className="flex items-center text-accent-600 text-sm font-medium">
+              <span>View rankings</span>
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+
+          <Link to="/calculators" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-green-300 transition-all">
+            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <HiCalculator className="w-6 h-6 text-green-600" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Calculators
+            </h3>
+            <p className="text-gray-600 text-sm mb-4">
+              EMI, SIP, and more financial tools
+            </p>
+            <div className="flex items-center text-green-600 text-sm font-medium">
+              <span>Start calculating</span>
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
 
           <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <HiChartBar className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <HiChartBar className="w-6 h-6 text-blue-600" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Simulations
