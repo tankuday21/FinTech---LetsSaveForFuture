@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
-import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar } from 'react-icons/hi2';
+import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser } from 'react-icons/hi2';
 import { getUserProgress } from '../services/progressService';
 
 const Dashboard = () => {
@@ -63,9 +63,13 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-700">
-                {user?.user_metadata?.full_name || user?.email}
-              </span>
+              <Link
+                to="/profile"
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+              >
+                <HiUser className="w-4 h-4" />
+                <span className="hidden sm:inline">{user?.user_metadata?.full_name || 'Profile'}</span>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"

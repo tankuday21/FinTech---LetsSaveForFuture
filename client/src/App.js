@@ -7,6 +7,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import Learn from './pages/Learn';
 import ModuleContent from './pages/ModuleContent';
+import Profile from './pages/Profile';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { testSupabaseConnection } from './utils/testSupabase';
 
@@ -65,6 +66,14 @@ function AnimatedRoutes() {
               element={
                 <PrivateRoute>
                   <ModuleContent />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <PrivateRoute>
+                  <Profile />
                 </PrivateRoute>
               } 
             />
