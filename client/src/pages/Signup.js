@@ -181,13 +181,13 @@ const Signup = () => {
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
                 I agree to the{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-500">
+                <span className="text-primary-600 hover:text-primary-500 cursor-pointer">
                   Terms of Service
-                </a>{' '}
+                </span>{' '}
                 and{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-500">
+                <span className="text-primary-600 hover:text-primary-500 cursor-pointer">
                   Privacy Policy
-                </a>
+                </span>
               </label>
             </div>
 
