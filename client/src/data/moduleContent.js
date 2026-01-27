@@ -287,14 +287,529 @@ export const moduleContent = {
   2: {
     sections: [
       {
-        title: "Coming Soon",
+        title: "Types of Income: Beyond Your Salary",
         content: [
           {
             type: "paragraph",
-            text: "This module content is being developed. Check back soon!"
+            text: "Money comes in many forms, and understanding different income types is the first step to building wealth. Let's explore how money can flow into your life!"
+          },
+          {
+            type: "heading",
+            text: "1. Active Income (Trading Time for Money)"
+          },
+          {
+            type: "paragraph",
+            text: "This is money you earn by actively working. If you stop working, the income stops."
+          },
+          {
+            type: "list",
+            items: [
+              "Salary/Wages - Your monthly paycheck from employment",
+              "Freelancing - Project-based income (design, writing, coding)",
+              "Consulting - Charging for your expertise and advice",
+              "Commission - Sales-based earnings",
+              "Gig Work - Uber, Zomato, Swiggy, etc."
+            ]
+          },
+          {
+            type: "example",
+            text: "Sneha works as a graphic designer earning ₹50,000/month salary. She also freelances on weekends, making an extra ₹15,000/month. Her total active income: ₹65,000/month."
+          },
+          {
+            type: "heading",
+            text: "2. Passive Income (Money Working for You)"
+          },
+          {
+            type: "paragraph",
+            text: "This is the dream! Money that comes in even when you're sleeping, traveling, or binge-watching Netflix."
+          },
+          {
+            type: "list",
+            items: [
+              "Rental Income - Earning from property you own",
+              "Dividend Income - Profits from stocks you hold",
+              "Interest Income - From FDs, savings accounts, bonds",
+              "Royalties - From books, music, patents, courses",
+              "Business Income - When your business runs without you"
+            ]
+          },
+          {
+            type: "keypoint",
+            text: "Goal: Build passive income streams so you're not dependent only on your job!"
+          },
+          {
+            type: "heading",
+            text: "3. Portfolio Income (Investment Returns)"
+          },
+          {
+            type: "paragraph",
+            text: "Money earned from buying and selling investments."
+          },
+          {
+            type: "list",
+            items: [
+              "Capital Gains - Profit from selling stocks, property, gold",
+              "Mutual Fund Returns - Growth in your investment value",
+              "Cryptocurrency Gains - (High risk, high reward)"
+            ]
+          },
+          {
+            type: "highlight",
+            text: "Pro Tip: Diversify your income sources! Don't put all your eggs in one basket. Aim for at least 2-3 income streams."
+          }
+        ]
+      },
+      {
+        title: "Decoding Your Payslip: What's CTC vs In-Hand?",
+        content: [
+          {
+            type: "paragraph",
+            text: "Ever wondered why your salary seems less than what was promised? Let's decode the mystery of the Indian payslip!"
+          },
+          {
+            type: "heading",
+            text: "Understanding CTC (Cost to Company)"
+          },
+          {
+            type: "paragraph",
+            text: "CTC is the TOTAL cost your employer spends on you annually. But you don't get all of it in your bank account!"
+          },
+          {
+            type: "example",
+            text: "Your offer letter says: CTC ₹8,00,000 per year. But your monthly salary is only ₹45,000. Where did ₹21,000 go? Let's find out!"
+          },
+          {
+            type: "heading",
+            text: "CTC Breakdown:"
+          },
+          {
+            type: "list",
+            items: [
+              "Basic Salary (40-50% of CTC) - The foundation of your salary",
+              "HRA (House Rent Allowance) - Tax benefit if you pay rent",
+              "Special Allowance - Additional perks and benefits",
+              "PF (Provident Fund) - 12% deducted, employer adds 12%",
+              "Gratuity - Paid after 5 years of service",
+              "Insurance - Health and life insurance premiums",
+              "Bonus - Performance-based or festival bonus"
+            ]
+          },
+          {
+            type: "heading",
+            text: "Deductions (Why your in-hand is less):"
+          },
+          {
+            type: "list",
+            items: [
+              "EPF (Employee Provident Fund) - 12% of basic",
+              "Professional Tax - ₹200/month (varies by state)",
+              "TDS (Tax Deducted at Source) - Income tax",
+              "ESI (if salary < ₹21,000) - Employee State Insurance"
+            ]
+          },
+          {
+            type: "keypoint",
+            text: "Formula: In-Hand Salary = CTC - (PF + Gratuity + Insurance + Tax + Other Deductions)"
+          },
+          {
+            type: "example",
+            text: "Real Example: CTC ₹8L → Basic ₹3.2L + HRA ₹1.6L + Special ₹2L + PF ₹76,800 + Gratuity ₹15,384 + Insurance ₹7,816 = ₹8L. After deductions (PF 12%, Tax, PT), In-hand ≈ ₹5.4L/year or ₹45,000/month."
+          },
+          {
+            type: "highlight",
+            text: "Always negotiate on CTC, but calculate your actual in-hand salary before making decisions!"
+          }
+        ]
+      },
+      {
+        title: "Fixed vs Variable Expenses: Know Your Money Flow",
+        content: [
+          {
+            type: "paragraph",
+            text: "Not all expenses are created equal. Understanding the difference helps you budget smarter and find areas to save."
+          },
+          {
+            type: "heading",
+            text: "Fixed Expenses (Same Every Month)"
+          },
+          {
+            type: "paragraph",
+            text: "These are predictable costs that don't change much month-to-month."
+          },
+          {
+            type: "list",
+            items: [
+              "Rent/EMI - Your biggest fixed expense usually",
+              "Insurance Premiums - Health, life, vehicle",
+              "Loan EMIs - Personal, car, education loans",
+              "Subscriptions - Netflix, Spotify, gym, internet",
+              "Phone/Utility Bills - Electricity, water, gas",
+              "SIP Investments - Treat savings as a fixed expense!"
+            ]
+          },
+          {
+            type: "example",
+            text: "Amit's Fixed Expenses: Rent ₹15,000 + Insurance ₹2,000 + Subscriptions ₹1,500 + Bills ₹3,000 + SIP ₹5,000 = ₹26,500/month"
+          },
+          {
+            type: "heading",
+            text: "Variable Expenses (Changes Every Month)"
+          },
+          {
+            type: "paragraph",
+            text: "These fluctuate based on your choices and lifestyle."
+          },
+          {
+            type: "list",
+            items: [
+              "Groceries - Can vary ₹3,000-₹8,000",
+              "Dining Out - Restaurants, cafes, food delivery",
+              "Shopping - Clothes, gadgets, accessories",
+              "Entertainment - Movies, events, trips",
+              "Transportation - Fuel, cab rides, auto",
+              "Personal Care - Salon, spa, grooming"
+            ]
+          },
+          {
+            type: "keypoint",
+            text: "Variable expenses are where you have the most control! This is where you can cut back if needed."
+          },
+          {
+            type: "heading",
+            text: "The 50/30/20 Rule Applied:"
+          },
+          {
+            type: "list",
+            items: [
+              "50% on Needs (Fixed + Essential Variable) - Rent, bills, groceries",
+              "30% on Wants (Non-essential Variable) - Fun, entertainment, shopping",
+              "20% on Savings & Investments - Your future self will thank you!"
+            ]
+          },
+          {
+            type: "example",
+            text: "On ₹50,000 salary: Needs ₹25,000 | Wants ₹15,000 | Savings ₹10,000. Simple and effective!"
+          },
+          {
+            type: "highlight",
+            text: "Track your expenses for 3 months to understand your spending patterns. Use apps like Walnut, Money Manager, or even Google Sheets!"
+          }
+        ]
+      },
+      {
+        title: "Needs vs Wants: The Ultimate Money Decision",
+        content: [
+          {
+            type: "paragraph",
+            text: "This is where most people struggle. Learning to distinguish between needs and wants is a superpower that will transform your finances!"
+          },
+          {
+            type: "heading",
+            text: "What are NEEDS?"
+          },
+          {
+            type: "paragraph",
+            text: "Things essential for survival and basic functioning. You literally can't live without them."
+          },
+          {
+            type: "list",
+            items: [
+              "Food & Water - Basic groceries, not fancy restaurants",
+              "Shelter - Rent or home loan payment",
+              "Clothing - Basic, functional clothes (not designer brands)",
+              "Healthcare - Medicine, doctor visits, insurance",
+              "Transportation - Getting to work (not luxury cars)",
+              "Utilities - Electricity, water, internet for work"
+            ]
+          },
+          {
+            type: "heading",
+            text: "What are WANTS?"
+          },
+          {
+            type: "paragraph",
+            text: "Things that make life enjoyable but aren't essential. You can live without them (even if it feels hard!)."
+          },
+          {
+            type: "list",
+            items: [
+              "Latest iPhone - Your old phone works fine",
+              "Dining Out - Cooking at home is cheaper",
+              "Designer Clothes - Basic clothes serve the same purpose",
+              "Premium Subscriptions - Do you really watch all 5 OTT platforms?",
+              "Luxury Vacations - Travel is great, but budget trips work too",
+              "Expensive Car - A bike or used car gets you there too"
+            ]
+          },
+          {
+            type: "keypoint",
+            text: "The Gray Area: Some wants can become needs based on your situation. A laptop is a need for a developer, but a want for others."
+          },
+          {
+            type: "heading",
+            text: "The 24-Hour Rule for Wants"
+          },
+          {
+            type: "paragraph",
+            text: "Before buying something you want (not need), wait 24 hours. If you still want it after a day, and can afford it without affecting your savings, go ahead!"
+          },
+          {
+            type: "example",
+            text: "Priya wanted to buy a ₹15,000 handbag. She waited 24 hours, realized she had 3 similar bags at home, and invested that ₹15,000 in mutual funds instead. A year later, it's worth ₹17,500!"
+          },
+          {
+            type: "heading",
+            text: "Hidden Expenses: The Silent Budget Killers"
+          },
+          {
+            type: "paragraph",
+            text: "These small expenses add up to BIG money over time!"
+          },
+          {
+            type: "list",
+            items: [
+              "Daily Coffee - ₹150/day = ₹4,500/month = ₹54,000/year!",
+              "Unused Subscriptions - Paying for gym you don't use?",
+              "Impulse Online Shopping - Those 'flash sales' aren't always deals",
+              "Food Delivery Charges - ₹50 delivery fee adds up",
+              "ATM Fees - Use your bank's ATM to avoid charges",
+              "Late Payment Fees - Credit card, bills, EMIs"
+            ]
+          },
+          {
+            type: "highlight",
+            text: "Challenge: Track EVERY expense for 30 days. You'll be shocked where your money actually goes!"
+          },
+          {
+            type: "heading",
+            text: "Smart Spending Hacks"
+          },
+          {
+            type: "list",
+            items: [
+              "Use the 30-day rule for big purchases",
+              "Buy generic brands for groceries (same quality, lower price)",
+              "Cook at home 5 days a week, eat out 2 days",
+              "Cancel unused subscriptions (audit every 3 months)",
+              "Use cashback and reward credit cards wisely",
+              "Buy during sales, but only what you actually need"
+            ]
+          },
+          {
+            type: "example",
+            text: "Rahul saved ₹12,000/month by: Making coffee at home (₹3,000), cooking dinner (₹5,000), canceling unused gym (₹2,000), and avoiding impulse buys (₹2,000). That's ₹1.44 lakhs saved per year!"
+          }
+        ]
+      },
+      {
+        title: "Building Your Expense Tracking System",
+        content: [
+          {
+            type: "paragraph",
+            text: "You can't manage what you don't measure. Let's set up a simple system to track your money!"
+          },
+          {
+            type: "heading",
+            text: "Method 1: The Envelope System (Old School but Effective)"
+          },
+          {
+            type: "paragraph",
+            text: "Divide your cash into envelopes for different categories:"
+          },
+          {
+            type: "list",
+            items: [
+              "Envelope 1: Groceries (₹6,000)",
+              "Envelope 2: Entertainment (₹3,000)",
+              "Envelope 3: Transportation (₹2,000)",
+              "Envelope 4: Personal Care (₹1,500)",
+              "When an envelope is empty, you stop spending in that category!"
+            ]
+          },
+          {
+            type: "heading",
+            text: "Method 2: Digital Tracking (Modern & Convenient)"
+          },
+          {
+            type: "paragraph",
+            text: "Best Apps for Indians:"
+          },
+          {
+            type: "list",
+            items: [
+              "Walnut - Auto-tracks expenses from SMS",
+              "Money Manager - Manual entry, great reports",
+              "ET Money - Expense tracking + investments",
+              "Google Sheets - Free, customizable, works everywhere",
+              "YNAB (You Need A Budget) - Premium but powerful"
+            ]
+          },
+          {
+            type: "heading",
+            text: "The 5-Minute Daily Habit"
+          },
+          {
+            type: "paragraph",
+            text: "Every night before bed, spend 5 minutes:"
+          },
+          {
+            type: "list",
+            items: [
+              "Log all expenses from the day",
+              "Categorize them (food, transport, entertainment, etc.)",
+              "Check if you're within budget",
+              "Adjust tomorrow's spending if needed"
+            ]
+          },
+          {
+            type: "keypoint",
+            text: "Consistency beats perfection! Even if you miss a day, just start again. The goal is awareness, not perfection."
+          },
+          {
+            type: "heading",
+            text: "Monthly Money Review (30 Minutes)"
+          },
+          {
+            type: "paragraph",
+            text: "At the end of each month, review:"
+          },
+          {
+            type: "list",
+            items: [
+              "Total income vs total expenses",
+              "Which category exceeded budget?",
+              "Where can you cut back next month?",
+              "Did you meet your savings goal?",
+              "Any unexpected expenses to plan for?"
+            ]
+          },
+          {
+            type: "example",
+            text: "Neha reviews her expenses monthly. She noticed she spent ₹8,000 on food delivery in March. In April, she cooked more and reduced it to ₹3,000, saving ₹5,000!"
+          },
+          {
+            type: "highlight",
+            text: "Action Step: Download an expense tracking app TODAY and log every expense for the next 30 days. You'll discover money leaks you never knew existed!"
+          },
+          {
+            type: "heading",
+            text: "Your Financial Dashboard"
+          },
+          {
+            type: "paragraph",
+            text: "Create a simple monthly dashboard to track:"
+          },
+          {
+            type: "list",
+            items: [
+              "Income: ₹XX,XXX",
+              "Fixed Expenses: ₹XX,XXX",
+              "Variable Expenses: ₹XX,XXX",
+              "Savings: ₹XX,XXX",
+              "Savings Rate: XX%",
+              "Net Worth: ₹XX,XXX (Assets - Liabilities)"
+            ]
+          },
+          {
+            type: "keypoint",
+            text: "Aim to increase your savings rate by 1% every month. Small improvements compound over time!"
           }
         ]
       }
-    ]
+    ],
+    quiz: {
+      questions: [
+        {
+          question: "Which of these is an example of PASSIVE income?",
+          options: [
+            "Salary from your 9-5 job",
+            "Freelancing on weekends",
+            "Rental income from a property you own",
+            "Commission from sales"
+          ],
+          correctAnswer: 2,
+          explanation: "Rental income is passive because you earn it without actively working for it. The property generates income even when you're not working."
+        },
+        {
+          question: "If your CTC is ₹6,00,000 per year, approximately what would be your monthly in-hand salary?",
+          options: ["₹50,000", "₹40,000", "₹35,000", "₹30,000"],
+          correctAnswer: 2,
+          explanation: "After deductions (PF, tax, insurance, etc.), your in-hand salary is typically 60-70% of CTC. So ₹6L CTC ≈ ₹35,000-40,000 in-hand per month."
+        },
+        {
+          question: "What percentage of your salary should go to NEEDS according to the 50/30/20 rule?",
+          options: ["30%", "40%", "50%", "60%"],
+          correctAnswer: 2,
+          explanation: "The 50/30/20 rule suggests 50% for needs, 30% for wants, and 20% for savings and investments."
+        },
+        {
+          question: "Which of these is a FIXED expense?",
+          options: [
+            "Dining out at restaurants",
+            "Monthly rent payment",
+            "Shopping for clothes",
+            "Weekend movie tickets"
+          ],
+          correctAnswer: 1,
+          explanation: "Rent is a fixed expense because it's the same amount every month and is predictable. The others are variable expenses that change based on your choices."
+        },
+        {
+          question: "What is the 24-hour rule for managing wants?",
+          options: [
+            "Buy everything within 24 hours",
+            "Wait 24 hours before buying something you want",
+            "Return items within 24 hours",
+            "Shop only for 24 hours per month"
+          ],
+          correctAnswer: 1,
+          explanation: "The 24-hour rule suggests waiting a day before buying something you want (not need). This helps avoid impulse purchases and saves money."
+        },
+        {
+          question: "If you spend ₹150 on coffee daily, how much do you spend per year?",
+          options: ["₹36,000", "₹45,000", "₹54,000", "₹60,000"],
+          correctAnswer: 2,
+          explanation: "₹150/day × 365 days = ₹54,750 per year! Small daily expenses add up to significant amounts over time."
+        },
+        {
+          question: "Which is the BEST way to treat savings in your budget?",
+          options: [
+            "Save whatever is left at month-end",
+            "Treat savings as a fixed expense and pay yourself first",
+            "Save only when you have extra money",
+            "Save only during bonus months"
+          ],
+          correctAnswer: 1,
+          explanation: "Treat savings as a fixed expense! 'Pay yourself first' by setting aside savings at the start of the month, not hoping for leftovers at the end."
+        },
+        {
+          question: "What is a 'hidden expense' that many people overlook?",
+          options: [
+            "Monthly rent",
+            "Grocery shopping",
+            "Unused gym membership",
+            "Electricity bill"
+          ],
+          correctAnswer: 2,
+          explanation: "Unused subscriptions like gym memberships are hidden expenses. You pay for them monthly but don't use them, wasting money silently."
+        },
+        {
+          question: "What percentage of CTC typically goes to EPF (Employee Provident Fund)?",
+          options: ["8%", "10%", "12%", "15%"],
+          correctAnswer: 2,
+          explanation: "12% of your basic salary goes to EPF (Employee Provident Fund), and your employer contributes another 12%, making it a great retirement savings tool."
+        },
+        {
+          question: "Which expense tracking method involves dividing cash into categories?",
+          options: [
+            "Digital tracking",
+            "Envelope system",
+            "Credit card method",
+            "Bank statement review"
+          ],
+          correctAnswer: 1,
+          explanation: "The envelope system involves dividing cash into physical envelopes for different spending categories. When an envelope is empty, you stop spending in that category!"
+        }
+      ]
+    }
   }
 };
