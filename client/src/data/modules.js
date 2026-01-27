@@ -1,3 +1,60 @@
+import { 
+  HiLightBulb, 
+  HiCurrencyDollar, 
+  HiCalculator, 
+  HiShieldCheck,
+  HiBuildingLibrary,
+  HiCreditCard,
+  HiBanknotes,
+  HiClock,
+  HiChartBar,
+  HiCreditCard as HiCard,
+  HiHome,
+  HiTarget,
+  HiRocketLaunch,
+  HiScale,
+  HiPresentationChartLine,
+  HiArrowTrendingUp,
+  HiChartPie,
+  HiPaintBrush,
+  HiReceiptPercent,
+  HiBeaker,
+  HiShieldExclamation,
+  HiExclamationTriangle,
+  HiDocumentText,
+  HiTrophy
+} from 'react-icons/hi2';
+
+export const getModuleIcon = (iconName) => {
+  const icons = {
+    'lightbulb': HiLightBulb,
+    'currency': HiCurrencyDollar,
+    'calculator': HiCalculator,
+    'shield': HiShieldCheck,
+    'bank': HiBuildingLibrary,
+    'gem': HiCreditCard,
+    'muscle': HiBanknotes,
+    'clock': HiClock,
+    'chart': HiChartBar,
+    'card': HiCard,
+    'home': HiHome,
+    'target': HiTarget,
+    'rocket': HiRocketLaunch,
+    'scale': HiScale,
+    'presentation': HiPresentationChartLine,
+    'trending': HiArrowTrendingUp,
+    'pie': HiChartPie,
+    'paint': HiPaintBrush,
+    'receipt': HiReceiptPercent,
+    'beaker': HiBeaker,
+    'shield-exclamation': HiShieldExclamation,
+    'warning': HiExclamationTriangle,
+    'document': HiDocumentText,
+    'trophy': HiTrophy
+  };
+  return icons[iconName] || HiLightBulb;
+};
+
 export const learningModules = [
   {
     level: 1,
@@ -13,7 +70,7 @@ export const learningModules = [
         description: "Why financial literacy matters and setting SMART goals",
         duration: "20 min",
         points: 100,
-        icon: "🎯",
+        icon: "lightbulb",
         topics: ["Money myths", "SMART goals", "Financial vision"],
         locked: false
       },
@@ -23,7 +80,7 @@ export const learningModules = [
         description: "Learn to read payslips and categorize expenses",
         duration: "25 min",
         points: 100,
-        icon: "💰",
+        icon: "currency",
         topics: ["Payslip breakdown", "Fixed vs variable", "Needs vs wants"],
         locked: false
       },
@@ -33,7 +90,7 @@ export const learningModules = [
         description: "Master the 50/30/20 rule and budgeting methods",
         duration: "30 min",
         points: 150,
-        icon: "📊",
+        icon: "calculator",
         topics: ["50/30/20 rule", "Zero-based budgeting", "Budget tools"],
         locked: true
       },
@@ -43,7 +100,7 @@ export const learningModules = [
         description: "Build your financial safety net step by step",
         duration: "20 min",
         points: 100,
-        icon: "🛡️",
+        icon: "shield",
         topics: ["Why emergency fund", "How much to save", "Where to keep"],
         locked: true
       }
@@ -63,7 +120,7 @@ export const learningModules = [
         description: "Choose the right savings account and maximize benefits",
         duration: "25 min",
         points: 150,
-        icon: "🏦",
+        icon: "bank",
         topics: ["Account types", "Interest rates", "Digital vs traditional"],
         locked: true
       },
@@ -73,7 +130,7 @@ export const learningModules = [
         description: "Understand FDs, RDs, and tax implications",
         duration: "30 min",
         points: 150,
-        icon: "💎",
+        icon: "gem",
         topics: ["FD vs RD", "Interest calculation", "Tax implications"],
         locked: true
       },
@@ -83,7 +140,7 @@ export const learningModules = [
         description: "Practical steps to build 3-6 months expenses",
         duration: "25 min",
         points: 150,
-        icon: "💪",
+        icon: "muscle",
         topics: ["Calculate target", "Auto-save", "When to use"],
         locked: true
       },
@@ -93,7 +150,7 @@ export const learningModules = [
         description: "Align savings with your financial goals",
         duration: "20 min",
         points: 100,
-        icon: "⏰",
+        icon: "clock",
         topics: ["Goal-based saving", "Liquidity", "Returns"],
         locked: true
       }
@@ -113,7 +170,7 @@ export const learningModules = [
         description: "Master CIBIL scores and credit reports",
         duration: "30 min",
         points: 200,
-        icon: "📈",
+        icon: "chart",
         topics: ["CIBIL score", "Credit factors", "Improve score"],
         locked: true
       },
@@ -123,7 +180,7 @@ export const learningModules = [
         description: "Use credit cards wisely and avoid debt traps",
         duration: "35 min",
         points: 200,
-        icon: "💳",
+        icon: "card",
         topics: ["How cards work", "Rewards", "Avoid traps"],
         locked: true
       },
@@ -133,7 +190,7 @@ export const learningModules = [
         description: "Understand different loans and calculate EMIs",
         duration: "30 min",
         points: 200,
-        icon: "🏠",
+        icon: "home",
         topics: ["Loan types", "EMI calculation", "Interest rates"],
         locked: true
       },
@@ -143,7 +200,7 @@ export const learningModules = [
         description: "Learn snowball and avalanche methods",
         duration: "25 min",
         points: 200,
-        icon: "🎯",
+        icon: "target",
         topics: ["Snowball method", "Avalanche method", "Debt-free plan"],
         locked: true
       }
@@ -163,7 +220,7 @@ export const learningModules = [
         description: "Why investing matters and power of compounding",
         duration: "30 min",
         points: 250,
-        icon: "🚀",
+        icon: "rocket",
         topics: ["Saving vs investing", "Compounding", "Start small"],
         locked: true
       },
@@ -173,7 +230,7 @@ export const learningModules = [
         description: "Assess your risk tolerance and balance portfolio",
         duration: "25 min",
         points: 200,
-        icon: "⚖️",
+        icon: "scale",
         topics: ["Risk-return tradeoff", "Risk types", "Asset allocation"],
         locked: true
       },
@@ -183,7 +240,7 @@ export const learningModules = [
         description: "Understand stock market and start trading",
         duration: "45 min",
         points: 300,
-        icon: "📊",
+        icon: "presentation",
         topics: ["NSE/BSE", "Demat account", "Stock orders"],
         locked: true
       },
@@ -193,7 +250,7 @@ export const learningModules = [
         description: "Master mutual funds and systematic investing",
         duration: "40 min",
         points: 300,
-        icon: "📈",
+        icon: "trending",
         topics: ["Fund types", "SIP", "NAV", "Tax implications"],
         locked: true
       }
@@ -213,7 +270,7 @@ export const learningModules = [
         description: "Learn passive investing strategies",
         duration: "35 min",
         points: 300,
-        icon: "📉",
+        icon: "pie",
         topics: ["ETFs", "Index funds", "Passive investing"],
         locked: true
       },
@@ -223,7 +280,7 @@ export const learningModules = [
         description: "Don't put all eggs in one basket",
         duration: "30 min",
         points: 300,
-        icon: "🎨",
+        icon: "paint",
         topics: ["Asset classes", "Rebalancing", "Risk management"],
         locked: true
       },
@@ -233,7 +290,7 @@ export const learningModules = [
         description: "Maximize tax savings with smart investments",
         duration: "40 min",
         points: 350,
-        icon: "💰",
+        icon: "receipt",
         topics: ["Section 80C", "ELSS", "PPF", "NPS"],
         locked: true
       },
@@ -243,7 +300,7 @@ export const learningModules = [
         description: "Plan for a secure retirement",
         duration: "35 min",
         points: 300,
-        icon: "🏖️",
+        icon: "beaker",
         topics: ["PPF benefits", "NPS tiers", "Retirement corpus"],
         locked: true
       }
@@ -263,7 +320,7 @@ export const learningModules = [
         description: "Choose the right insurance coverage",
         duration: "35 min",
         points: 300,
-        icon: "🛡️",
+        icon: "shield-exclamation",
         topics: ["Term insurance", "Health insurance", "Coverage calculation"],
         locked: true
       },
@@ -273,7 +330,7 @@ export const learningModules = [
         description: "Protect your wealth from uncertainties",
         duration: "30 min",
         points: 300,
-        icon: "⚠️",
+        icon: "warning",
         topics: ["Risk types", "Hedging", "Insurance vs investment"],
         locked: true
       },
@@ -283,7 +340,7 @@ export const learningModules = [
         description: "Plan for wealth transfer and succession",
         duration: "25 min",
         points: 250,
-        icon: "📜",
+        icon: "document",
         topics: ["Will", "Nomination", "Succession planning"],
         locked: true
       },
@@ -293,7 +350,7 @@ export const learningModules = [
         description: "Strategies for sustainable wealth creation",
         duration: "30 min",
         points: 300,
-        icon: "👑",
+        icon: "trophy",
         topics: ["Wealth mindset", "Multiple income", "Legacy building"],
         locked: true
       }

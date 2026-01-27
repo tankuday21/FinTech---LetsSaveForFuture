@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { learningModules, getLevelColor } from '../data/modules';
+import { learningModules, getLevelColor, getModuleIcon } from '../data/modules';
 import { HiLockClosed, HiClock, HiStar, HiCheckCircle } from 'react-icons/hi2';
 
 const Learn = () => {
@@ -115,6 +115,8 @@ const Learn = () => {
 };
 
 const ModuleCard = ({ module, colors }) => {
+  const IconComponent = getModuleIcon(module.icon);
+  
   return (
     <div className={`relative border ${colors.border} rounded-lg p-5 hover:shadow-md transition-all ${module.locked ? 'opacity-60' : 'cursor-pointer hover:border-primary-300'}`}>
       {/* Lock Overlay */}
@@ -125,8 +127,8 @@ const ModuleCard = ({ module, colors }) => {
       )}
 
       {/* Module Icon */}
-      <div className={`w-12 h-12 ${colors.icon} rounded-lg flex items-center justify-center text-2xl mb-3`}>
-        {module.icon}
+      <div className={`w-12 h-12 ${colors.icon} rounded-lg flex items-center justify-center mb-3`}>
+        <IconComponent className="w-6 h-6" />
       </div>
 
       {/* Module Info */}
