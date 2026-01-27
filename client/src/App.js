@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Login from './pages/Login';
@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { testSupabaseConnection } from './utils/testSupabase';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -23,6 +24,11 @@ const PrivateRoute = ({ children }) => {
 
 function AnimatedRoutes() {
   const location = useLocation();
+  
+  useEffect(() => {
+    // Test Supabase connection on app load
+    testSupabaseConnection();
+  }, []);
   
   return (
     <div className="transition-wrapper">

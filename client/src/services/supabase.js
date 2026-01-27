@@ -7,28 +7,49 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Auth functions
 export const signUp = async (email, password, fullName) => {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        full_name: fullName,
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+        emailRedirectTo: `${window.location.origin}/dashboard`,
       }
+    });
+    
+    if (error) {
+      console.error('Signup error:', error);
+      throw error;
     }
-  });
-  
-  if (error) throw error;
-  return data;
+    
+    console.log('Signup successful:', data);
+    return data;
+  } catch (err) {
+    console.error('Signup exception:', err);
+    throw err;
+  }
 };
 
 export const signIn = async (email, password) => {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-  
-  if (error) throw error;
-  return data;
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    
+    if (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+    
+    console.log('Login successful:', data);
+    return data;
+  } catch (err) {
+    console.error('Login exception:', err);
+    throw err;
+  }
 };
 
 export const signOut = async () => {
