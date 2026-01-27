@@ -45,29 +45,9 @@ const CustomSlider = ({
     updateValue(e);
   };
 
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      updateValue(e);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
   const handleTouchStart = (e) => {
     setIsDragging(true);
     updateValue(e.touches[0]);
-  };
-
-  const handleTouchMove = (e) => {
-    if (isDragging) {
-      updateValue(e.touches[0]);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
   };
 
   const updateValue = (e) => {
@@ -84,20 +64,38 @@ const CustomSlider = ({
   };
 
   useEffect(() => {
+    const handleMove = (e) => {
+      if (!isDragging) return;
+      const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+      if (clientX && sliderRef.current) {
+        const rect = sliderRef.current.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const percentage = Math.max(0, Math.min(1, x / rect.width));
+        const rawValue = min + percentage * (max - min);
+        const steppedValue = Math.round(rawValue / step) * step;
+        const clampedValue = Math.max(min, Math.min(max, steppedValue));
+        onChange(clampedValue);
+      }
+    };
+
+    const handleEnd = () => {
+      setIsDragging(false);
+    };
+
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchmove', handleTouchMove);
-      document.addEventListener('touchend', handleTouchEnd);
+      document.addEventListener('mousemove', handleMove);
+      document.addEventListener('mouseup', handleEnd);
+      document.addEventListener('touchmove', handleMove);
+      document.addEventListener('touchend', handleEnd);
 
       return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchend', handleTouchEnd);
+        document.removeEventListener('mousemove', handleMove);
+        document.removeEventListener('mouseup', handleEnd);
+        document.removeEventListener('touchmove', handleMove);
+        document.removeEventListener('touchend', handleEnd);
       };
     }
-  }, [isDragging]);
+  }, [isDragging, min, max, step, onChange]);
 
   return (
     <div className="w-full">
