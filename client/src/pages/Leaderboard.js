@@ -16,13 +16,8 @@ const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [userRank, setUserRank] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [timeFilter, setTimeFilter] = useState('all'); // all, week, month
 
-  useEffect(() => {
-    loadLeaderboard();
-  }, [timeFilter]);
-
-  const loadLeaderboard = async () => {
+  const loadLeaderboard = React.useCallback(async () => {
     try {
       setLoading(true);
 
@@ -67,7 +62,11 @@ const Leaderboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.id]);
+
+  useEffect(() => {
+    loadLeaderboard();
+  }, [loadLeaderboard]);
 
   const getMedalIcon = (rank) => {
     if (rank === 1) return '🥇';
