@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { learningModules, getModuleIcon } from '../data/modules';
 import { moduleContent } from '../data/moduleContent';
+import Quiz from '../components/Quiz';
+import QuizResults from '../components/QuizResults';
 import { HiArrowLeft, HiArrowRight, HiCheckCircle } from 'react-icons/hi2';
 
 const ModuleContent = () => {
   const { moduleId } = useParams();
   const navigate = useNavigate();
   const [currentSection, setCurrentSection] = useState(0);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [quizScore, setQuizScore] = useState(null);
 
   // Find the module
   const module = learningModules
@@ -31,11 +35,20 @@ const ModuleContent = () => {
 
   const IconComponent = getModuleIcon(module.icon);
   const totalSections = content.sections.length;
-  const progress = ((currentSection + 1) / totalSections) * 100;
+  const hasQuiz = content.quiz && content.quiz.questions;
+  
+  // Calculate progress including quiz
+  const totalSteps = hasQuiz ? totalSections + 1 : totalSections;
+  const currentStep = showQuiz ? totalSections : (quizScore !== null ? totalSteps : currentSection);
+  const progress = ((currentStep + 1) / totalSteps) * 100;
 
   const handleNext = () => {
     if (currentSection < totalSections - 1) {
       setCurrentSection(currentSection + 1);
+      window.scrollTo(0, 0);
+    } else if (hasQuiz && !showQuiz && quizScore === null) {
+      // Show quiz after last section
+      setShowQuiz(true);
       window.scrollTo(0, 0);
     } else {
       // Module completed
@@ -44,10 +57,22 @@ const ModuleContent = () => {
   };
 
   const handlePrevious = () => {
-    if (currentSection > 0) {
+    if (showQuiz) {
+      setShowQuiz(false);
+      window.scrollTo(0, 0);
+    } else if (currentSection > 0) {
       setCurrentSection(currentSection - 1);
       window.scrollTo(0, 0);
     }
+  };
+
+  const handleQuizComplete = (score, total) => {
+    setQuizScore({ score, total });
+    window.scrollTo(0, 0);
+  };
+
+  const handleContinue = () => {
+    navigate('/learn');
   };
 
   const currentSectionData = content.sections[currentSection];
@@ -66,7 +91,13 @@ const ModuleContent = () => {
               <span className="text-sm font-medium">Back to Learning</span>
             </Link>
             <div className="text-sm text-gray-600">
-              Section {currentSection + 1} of {totalSections}
+              {quizScore !== null ? (
+                'Quiz Complete'
+              ) : showQuiz ? (
+                'Quiz Time!'
+              ) : (
+                `Section ${currentSection + 1} of ${totalSections}`
+              )}
             </div>
           </div>
 
@@ -97,40 +128,63 @@ const ModuleContent = () => {
           </div>
         </div>
 
-        {/* Section Content */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-6 border border-gray-200">
-          <h2 className="text-2xl font-display font-bold text-gray-900 mb-6">
-            {currentSectionData.title}
-          </h2>
+        {/* Quiz Results */}
+        {quizScore !== null ? (
+          <QuizResults
+            score={quizScore.score}
+            totalQuestions={quizScore.total}
+            onContinue={handleContinue}
+          />
+        ) : showQuiz ? (
+          /* Quiz */
+          <Quiz
+            questions={content.quiz.questions}
+            onComplete={handleQuizComplete}
+          />
+        ) : (
+          /* Section Content */
+          <>
+            <div className="bg-white rounded-xl shadow-sm p-8 mb-6 border border-gray-200">
+              <h2 className="text-2xl font-display font-bold text-gray-900 mb-6">
+                {currentSectionData.title}
+              </h2>
 
-          {currentSectionData.content.map((block, index) => (
-            <ContentBlock key={index} block={block} />
-          ))}
-        </div>
+              {currentSectionData.content.map((block, index) => (
+                <ContentBlock key={index} block={block} />
+              ))}
+            </div>
 
-        {/* Navigation */}
-        <div className="flex items-center justify-between">
-          <button
-            onClick={handlePrevious}
-            disabled={currentSection === 0}
-            className="flex items-center space-x-2 px-6 py-3 text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            <HiArrowLeft className="w-5 h-5" />
-            <span className="font-medium">Previous</span>
-          </button>
+            {/* Navigation */}
+            <div className="flex items-center justify-between">
+              <button
+                onClick={handlePrevious}
+                disabled={currentSection === 0}
+                className="flex items-center space-x-2 px-6 py-3 text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <HiArrowLeft className="w-5 h-5" />
+                <span className="font-medium">Previous</span>
+              </button>
 
-          <button
-            onClick={handleNext}
-            className="flex items-center space-x-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
-          >
-            <span>{currentSection === totalSections - 1 ? 'Complete Module' : 'Next Section'}</span>
-            {currentSection === totalSections - 1 ? (
-              <HiCheckCircle className="w-5 h-5" />
-            ) : (
-              <HiArrowRight className="w-5 h-5" />
-            )}
-          </button>
-        </div>
+              <button
+                onClick={handleNext}
+                className="flex items-center space-x-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
+              >
+                <span>
+                  {currentSection === totalSections - 1 && hasQuiz
+                    ? 'Take Quiz'
+                    : currentSection === totalSections - 1
+                    ? 'Complete Module'
+                    : 'Next Section'}
+                </span>
+                {currentSection === totalSections - 1 ? (
+                  <HiCheckCircle className="w-5 h-5" />
+                ) : (
+                  <HiArrowRight className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

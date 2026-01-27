@@ -209,11 +209,78 @@ export const moduleContent = {
           },
           {
             type: "highlight",
-            text: "Congratulations! You've completed Module 1. You now understand why financial literacy matters, have busted common money myths, and know how to set SMART financial goals. You're ready to move forward!"
+            text: "Congratulations! You've completed the learning content. Now test your knowledge with a quick quiz!"
           }
         ]
       }
-    ]
+    ],
+    quiz: {
+      questions: [
+        {
+          question: "According to the S&P Global FinLit Survey, what percentage of Indians are financially literate?",
+          options: ["15%", "27%", "45%", "60%"],
+          correctAnswer: 1,
+          explanation: "Only 27% of Indians are financially literate, which means there's a huge opportunity for improvement!"
+        },
+        {
+          question: "What is the minimum amount you can start investing with through SIPs?",
+          options: ["₹50 per month", "₹100 per month", "₹500 per month", "₹1,000 per month"],
+          correctAnswer: 1,
+          explanation: "You can start investing with as little as ₹100 per month through SIPs. The key is to start early, not to start big!"
+        },
+        {
+          question: "In the 50/30/20 budgeting rule, what percentage is allocated for 'wants' or fun money?",
+          options: ["20%", "30%", "40%", "50%"],
+          correctAnswer: 1,
+          explanation: "The 50/30/20 rule allocates 30% for wants, which means you can still enjoy life while being financially responsible!"
+        },
+        {
+          question: "What does the 'M' in SMART goals stand for?",
+          options: ["Meaningful", "Measurable", "Monetary", "Monthly"],
+          correctAnswer: 1,
+          explanation: "The 'M' stands for Measurable - you should be able to track your progress with specific numbers."
+        },
+        {
+          question: "Which of these is a short-term financial goal (0-2 years)?",
+          options: [
+            "Buying a house",
+            "Retirement planning",
+            "Building an emergency fund",
+            "Children's education fund"
+          ],
+          correctAnswer: 2,
+          explanation: "Building an emergency fund is a short-term goal that should be prioritized before long-term investments."
+        },
+        {
+          question: "According to studies, how much more likely are you to achieve goals if you write them down?",
+          options: ["20% more likely", "42% more likely", "60% more likely", "80% more likely"],
+          correctAnswer: 1,
+          explanation: "Studies show people who write down their goals are 42% more likely to achieve them. So grab a pen!"
+        },
+        {
+          question: "What is the recommended emergency fund size?",
+          options: [
+            "1 month of expenses",
+            "2 months of expenses",
+            "3-6 months of expenses",
+            "12 months of expenses"
+          ],
+          correctAnswer: 2,
+          explanation: "Financial experts recommend having 3-6 months of expenses saved as an emergency fund for unexpected situations."
+        },
+        {
+          question: "Which statement about credit cards is TRUE?",
+          options: [
+            "Credit cards are always bad and should be avoided",
+            "Credit cards are tools that can be beneficial when used wisely",
+            "You should always pay only the minimum due",
+            "Credit cards don't affect your credit score"
+          ],
+          correctAnswer: 1,
+          explanation: "Credit cards are tools. Used wisely, they build credit scores and offer rewards. Used poorly, they create debt traps."
+        }
+      ]
+    }
   },
 
   // Module 2: Understanding Income & Expenses
