@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { learningModules, getLevelColor, getModuleIcon } from '../data/modules';
 import { HiLockClosed, HiClock, HiStar, HiCheckCircle } from 'react-icons/hi2';
 
@@ -118,7 +119,11 @@ const ModuleCard = ({ module, colors }) => {
   const IconComponent = getModuleIcon(module.icon);
   
   return (
-    <div className={`relative border ${colors.border} rounded-lg p-5 hover:shadow-md transition-all ${module.locked ? 'opacity-60' : 'cursor-pointer hover:border-primary-300'}`}>
+    <Link
+      to={module.locked ? '#' : `/learn/module/${module.id}`}
+      className={`block relative border ${colors.border} rounded-lg p-5 hover:shadow-md transition-all ${module.locked ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-primary-300'}`}
+      onClick={(e) => module.locked && e.preventDefault()}
+    >
       {/* Lock Overlay */}
       {module.locked && (
         <div className="absolute top-3 right-3">
@@ -165,11 +170,11 @@ const ModuleCard = ({ module, colors }) => {
 
       {/* Start Button */}
       {!module.locked && (
-        <button className="mt-4 w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+        <div className="mt-4 w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-center">
           Start Learning
-        </button>
+        </div>
       )}
-    </div>
+    </Link>
   );
 };
 
