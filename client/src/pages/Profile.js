@@ -5,7 +5,7 @@ import { getUserProgress, getModuleCompletions } from '../services/progressServi
 import { supabase } from '../services/supabase';
 import { 
   HiUser, 
-  HiMail, 
+  HiEnvelope, 
   HiCalendar, 
   HiTrophy, 
   HiAcademicCap,
@@ -152,7 +152,7 @@ const Profile = () => {
               {/* Basic Info */}
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <HiMail className="w-5 h-5 text-gray-400 mt-0.5" />
+                  <HiEnvelope className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div className="flex-1">
                     <p className="text-xs text-gray-500 mb-1">Email</p>
                     <p className="text-sm text-gray-900 break-all">{user?.email}</p>
