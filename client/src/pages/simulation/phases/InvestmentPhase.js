@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSimulation } from '../../../context/SimulationContext';
 import FingoCard from '../../../components/FingoCard';
 import FingoButton from '../../../components/FingoButton';
-import { HiArrowTrendingUp, HiArrowTrendingDown, HiCurrencyRupee, HiLockClosed } from 'react-icons/hi2';
+import { HiArrowTrendingUp, HiArrowTrendingDown, HiLockClosed } from 'react-icons/hi2';
 
 const AssetCard = ({ title, price, held, type, trend, onInvest }) => {
     const [amount, setAmount] = useState('');

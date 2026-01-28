@@ -4,7 +4,7 @@ import FingoCard from '../../../components/FingoCard';
 import FingoButton from '../../../components/FingoButton';
 
 const BudgetPhase = () => {
-    const { stats, monthlyAllocator, setMonthlyAllocator, advancePhase, calculateSalary } = useSimulation();
+    const { monthlyAllocator, setMonthlyAllocator, calculateSalary, advancePhase } = useSimulation();
 
     const salary = calculateSalary();
 

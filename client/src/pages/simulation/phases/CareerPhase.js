@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSimulation } from '../../../context/SimulationContext';
 import FingoCard from '../../../components/FingoCard';
 import FingoButton from '../../../components/FingoButton';
 import { sideHustles, educationOptions } from '../data/jobs';
-import { HiLightningBolt, HiBriefcase, HiCurrencyRupee, HiAcademicCap } from 'react-icons/hi';
+import { HiLightningBolt, HiCurrencyRupee, HiAcademicCap } from 'react-icons/hi';
 
 const CareerPhase = () => {
     const { stats, advancePhase, performAction } = useSimulation();

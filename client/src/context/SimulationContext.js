@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { initialScenarios } from '../pages/simulation/data/scenarios';
 
 const SimulationContext = createContext();
@@ -87,8 +87,6 @@ export const SimulationProvider = ({ children }) => {
             const salary = calculateSalary();
             const needsAmt = (salary * monthlyAllocator.needs) / 100;
             const wantsAmt = (salary * monthlyAllocator.wants) / 100;
-            const savingsAmt = (salary * monthlyAllocator.savings) / 100;
-
             // Apply Budget Effects
             setStats(prev => ({
                 ...prev,
@@ -268,7 +266,7 @@ export const SimulationProvider = ({ children }) => {
         <SimulationContext.Provider value={{
             gameState, currentMonth, year, phase,
             stats, portfolio, marketPrices, netWorthHistory,
-            inventory, flags, monthlyAllocator, setMonthlyAllocator,
+            inventory, flags, monthlyAllocator, setMonthlyAllocator, history,
             startGame, advancePhase, handleChoice, currentScenario,
             buyItem, invest, performAction, calculateSalary, calculateNetWorth
         }}>
