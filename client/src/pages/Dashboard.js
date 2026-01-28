@@ -97,129 +97,143 @@ const Dashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          {/* Total Points Card */}
+          <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-lg p-6 border-2 border-yellow-200 transform transition-all hover:scale-105 hover:shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Points</p>
-                <p className="text-3xl font-bold text-primary-600">
+                <p className="text-sm font-semibold text-yellow-700 mb-1">Total Points</p>
+                <p className="text-4xl font-bold text-yellow-600">
                   {loading ? '...' : userProgress.total_points}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <HiStar className="w-6 h-6 text-primary-600" />
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
+                <HiStar className="w-8 h-8 text-white" />
               </div>
+            </div>
+            <div className="mt-3 text-xs text-yellow-600 font-medium">
+              Keep earning! 🎯
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          {/* Modules Completed Card */}
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-lg p-6 border-2 border-green-200 transform transition-all hover:scale-105 hover:shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Modules Completed</p>
-                <p className="text-3xl font-bold text-green-600">
+                <p className="text-sm font-semibold text-green-700 mb-1">Modules Done</p>
+                <p className="text-4xl font-bold text-green-600">
                   {loading ? '...' : `${userProgress.modules_completed}/24`}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <HiAcademicCap className="w-6 h-6 text-green-600" />
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12">
+                <HiAcademicCap className="w-8 h-8 text-white" />
               </div>
+            </div>
+            <div className="mt-3 text-xs text-green-600 font-medium">
+              You're doing great! 🌟
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          {/* Progress Card */}
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-6 border-2 border-purple-200 transform transition-all hover:scale-105 hover:shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Progress</p>
-                <p className="text-3xl font-bold text-accent-600">
+                <p className="text-sm font-semibold text-purple-700 mb-1">Progress</p>
+                <p className="text-4xl font-bold text-purple-600">
                   {loading ? '...' : `${Math.round((userProgress.modules_completed / 24) * 100)}%`}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
-                <HiChartBar className="w-6 h-6 text-accent-600" />
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
+                <HiChartBar className="w-8 h-8 text-white" />
               </div>
+            </div>
+            <div className="mt-3 text-xs text-purple-600 font-medium">
+              Almost there! 🚀
             </div>
           </div>
 
-          {/* Streak Card - Compact Version */}
-          <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl shadow-sm p-6 border-2 border-orange-200">
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-gray-600">Current Streak</p>
-              <span className="text-2xl">🔥</span>
+          {/* Streak Card */}
+          <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-lg p-6 border-2 border-orange-300 transform transition-all hover:scale-105 hover:shadow-xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-orange-700 mb-1">Current Streak</p>
+                <p className="text-4xl font-bold text-orange-600">
+                  {loading ? '...' : userProgress.current_streak || 0}
+                </p>
+              </div>
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
+                <span className="text-4xl">🔥</span>
+              </div>
             </div>
-            <p className="text-3xl font-bold text-orange-600 mb-1">
-              {loading ? '...' : userProgress.current_streak || 0}
-            </p>
-            <p className="text-xs text-gray-600">
-              {userProgress.current_streak === 1 ? 'day' : 'days'} • Best: {userProgress.longest_streak || 0}
-            </p>
+            <div className="mt-3 text-xs text-orange-600 font-medium">
+              Best: {userProgress.longest_streak || 0} days 💪
+            </div>
           </div>
         </div>
 
         {/* Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Link to="/learn" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-primary-300 transition-all">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-              <HiAcademicCap className="w-6 h-6 text-primary-600" />
+          <Link to="/learn" className="group bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg p-6 border-2 border-blue-400 hover:shadow-2xl transition-all transform hover:scale-105 hover:-rotate-1">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <HiAcademicCap className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-white mb-2">
               Start Learning
             </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Explore 24 modules across 6 levels
+            <p className="text-blue-100 text-sm mb-4">
+              24 fun modules waiting! 📚
             </p>
-            <div className="flex items-center text-primary-600 text-sm font-medium">
-              <span>Begin your journey</span>
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+            <div className="flex items-center text-white text-sm font-bold">
+              <span>Let's go!</span>
+              <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
             </div>
           </Link>
 
-          <Link to="/leaderboard" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-accent-300 transition-all">
-            <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-              <HiTrophy className="w-6 h-6 text-accent-600" />
+          <Link to="/leaderboard" className="group bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl shadow-lg p-6 border-2 border-yellow-300 hover:shadow-2xl transition-all transform hover:scale-105 hover:rotate-1">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <HiTrophy className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-white mb-2">
               Leaderboard
             </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              See how you rank against others
+            <p className="text-yellow-100 text-sm mb-4">
+              Compete with others! 🏆
             </p>
-            <div className="flex items-center text-accent-600 text-sm font-medium">
-              <span>View rankings</span>
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+            <div className="flex items-center text-white text-sm font-bold">
+              <span>View ranks</span>
+              <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
             </div>
           </Link>
 
-          <Link to="/calculators" className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md hover:border-green-300 transition-all">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <HiCalculator className="w-6 h-6 text-green-600" />
+          <Link to="/calculators" className="group bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl shadow-lg p-6 border-2 border-green-300 hover:shadow-2xl transition-all transform hover:scale-105 hover:-rotate-1">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <HiCalculator className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-white mb-2">
               Calculators
             </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              EMI, SIP, and more financial tools
+            <p className="text-green-100 text-sm mb-4">
+              Plan your finances! 🧮
             </p>
-            <div className="flex items-center text-green-600 text-sm font-medium">
-              <span>Start calculating</span>
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+            <div className="flex items-center text-white text-sm font-bold">
+              <span>Calculate</span>
+              <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
             </div>
           </Link>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-              <HiChartBar className="w-6 h-6 text-blue-600" />
+          <div className="group bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl shadow-lg p-6 border-2 border-pink-300 opacity-75 cursor-not-allowed">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
+              <HiChartBar className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-white mb-2">
               Simulations
             </h3>
-            <p className="text-gray-600 text-sm">
-              Coming soon...
+            <p className="text-pink-100 text-sm mb-4">
+              Coming soon! 🎮
             </p>
+            <div className="flex items-center text-white text-sm font-bold">
+              <span>Stay tuned</span>
+              <span className="ml-2">🔒</span>
+            </div>
           </div>
         </div>
       </main>

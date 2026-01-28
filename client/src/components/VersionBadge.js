@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VersionBadge = () => {
-  const version = 'v1.2.0'; // Update this with each release
+  const version = 'v1.3.0'; // Update this with each release
 
   return (
     <div className="fixed top-4 right-4 z-50">
