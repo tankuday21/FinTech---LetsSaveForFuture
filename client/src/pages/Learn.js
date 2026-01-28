@@ -7,7 +7,6 @@ import { getUserProgress, getModuleCompletions, canAccessModule } from '../servi
 
 const Learn = () => {
   const { user } = useAuth();
-  const [selectedLevel, setSelectedLevel] = useState(null);
   const [userProgress, setUserProgress] = useState({ total_points: 0, modules_completed: 0 });
   const [completedModules, setCompletedModules] = useState([]);
   const [moduleAccess, setModuleAccess] = useState({});

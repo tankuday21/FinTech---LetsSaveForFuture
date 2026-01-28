@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   HiCheckCircle,
   HiXCircle,
-  HiArrowRight,
-  HiPlay,
   HiFaceFrown,
   HiMagnifyingGlass,
   HiQuestionMarkCircle,
@@ -12,15 +10,6 @@ import {
 } from 'react-icons/hi2';
 
 // Theme Colors matching the reference
-const colors = {
-  bg: 'bg-[#F9FDFC]',
-  primary: 'bg-[#22C55E]', // Green for buttons
-  primaryDark: 'bg-[#15803D]',
-  secondary: 'bg-[#FFFFFF]', // White for buttons
-  textDark: 'text-[#0F172A]',
-  textGreen: 'text-[#22C55E]',
-  dot: '#E2E8F0' // color for the dotted background
-};
 
 const WarningCard = ({ color, rotate, title, image, icon: Icon, highlight, description }) => (
   <div
