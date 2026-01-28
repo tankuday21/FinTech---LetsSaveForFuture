@@ -381,7 +381,7 @@ const Profile = () => {
                     to="/learn"
                     className="inline-block mt-3 text-primary-600 hover:text-primary-700 text-sm font-medium"
                   >
-                    Start Learning →
+                    Start Adventure →
                   </Link>
                 </div>
               )}

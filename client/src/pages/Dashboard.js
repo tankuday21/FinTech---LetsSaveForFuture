@@ -178,7 +178,7 @@ const Dashboard = () => {
               <HiAcademicCap className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">
-              Start Learning
+              Start Adventure
             </h3>
             <p className="text-blue-100 text-sm mb-4">
               24 fun modules waiting! 📚
