@@ -12,7 +12,10 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafbfc;
+  background-color: #F9FDFC;
+  background-image: radial-gradient(#E2E8F0 2px, transparent 2px);
+  background-size: 30px 30px;
+  color: #0F172A;
   overflow-x: hidden;
 }
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signIn } from '../services/supabase';
-import { HiCheckCircle } from 'react-icons/hi2';
+import { HiArrowLeft } from 'react-icons/hi2';
+import FingoButton from '../components/FingoButton';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,27 +39,35 @@ const Login = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Form */}
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-md w-full space-y-8">
+      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-20 xl:px-24 bg-white relative z-10 shadow-2xl rounded-r-[3rem]">
+
+        <div className="absolute top-8 left-8">
+          <Link to="/" className="flex items-center gap-2 text-gray-500 hover:text-green-600 transition-colors font-bold">
+            <HiArrowLeft className="w-5 h-5" />
+            Back
+          </Link>
+        </div>
+
+        <div className="max-w-md w-full mx-auto space-y-8">
           <div>
             <h2 className="text-4xl font-display font-bold text-gray-900 mb-2">
-              Welcome back
+              Welcome back! 👋
             </h2>
-            <p className="text-gray-600">
-              Continue your financial learning journey
+            <p className="text-xl text-gray-600 font-medium">
+              Ready to continue your financial adventure?
             </p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-red-50 border-2 border-red-100 text-red-700 px-4 py-3 rounded-2xl text-sm font-medium">
                 {error}
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
                   Email address
                 </label>
                 <input
@@ -69,13 +78,13 @@ const Login = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  className="appearance-none relative block w-full px-5 py-4 border-2 border-gray-200 placeholder-gray-400 text-gray-900 rounded-2xl focus:outline-none focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all font-medium"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="password" className="block text-sm font-bold text-gray-700 mb-2">
                   Password
                 </label>
                 <input
@@ -86,7 +95,7 @@ const Login = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  className="appearance-none relative block w-full px-5 py-4 border-2 border-gray-200 placeholder-gray-400 text-gray-900 rounded-2xl focus:outline-none focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all font-medium"
                   placeholder="••••••••"
                 />
               </div>
@@ -98,32 +107,32 @@ const Login = () => {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  className="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 rounded-lg cursor-pointer"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 font-medium cursor-pointer">
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500">
+                <Link to="/forgot-password" className="font-bold text-green-600 hover:text-green-500">
                   Forgot password?
                 </Link>
               </div>
             </div>
 
-            <button
+            <FingoButton
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full text-lg"
             >
               {loading ? 'Signing in...' : 'Sign in'}
-            </button>
+            </FingoButton>
 
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
+            <div className="text-center mt-6">
+              <p className="text-gray-600 font-medium">
                 Don't have an account?{' '}
-                <Link to="/signup" className="font-semibold text-primary-600 hover:text-primary-500">
+                <Link to="/signup" className="font-bold text-green-600 hover:text-green-500 hover:underline">
                   Sign up for free
                 </Link>
               </p>
@@ -132,29 +141,26 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right Side - Illustration/Info */}
-      <div className="hidden lg:flex flex-1 bg-primary-600 items-center justify-center p-12">
-        <div className="max-w-md text-white">
-          <h1 className="text-5xl font-display font-bold mb-6">
-            FinLearn
-          </h1>
-          <p className="text-xl text-primary-100 mb-8">
-            Master personal finance and investing through interactive challenges, quizzes, and real-world simulations.
+      {/* Right Side - Illustration */}
+      <div className="hidden lg:flex flex-1 bg-green-50 items-center justify-center p-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-30"></div>
+
+        {/* Decorative blobs */}
+        <div className="absolute top-20 right-20 w-32 h-32 bg-green-200 rounded-full blur-3xl opacity-60 animate-pulse"></div>
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-green-200 rounded-full blur-3xl opacity-60 animate-pulse delay-1000"></div>
+
+        <div className="max-w-xl text-center relative z-10">
+          <img
+            src="/assets/login_illustration.png"
+            alt="Secure Login"
+            className="w-full h-auto drop-shadow-2xl mb-8 transform hover:scale-105 transition-transform duration-500"
+          />
+          <h2 className="text-3xl font-display font-bold text-gray-900 mb-4">
+            Your Vault is Waiting
+          </h2>
+          <p className="text-lg text-gray-600 font-medium">
+            Secure, reliable, and always ready for you.
           </p>
-          <div className="space-y-4">
-            <div className="flex items-start space-x-3">
-              <HiCheckCircle className="w-6 h-6 text-white flex-shrink-0 mt-1" />
-              <p className="text-primary-50">Learn budgeting, saving, and debt management</p>
-            </div>
-            <div className="flex items-start space-x-3">
-              <HiCheckCircle className="w-6 h-6 text-white flex-shrink-0 mt-1" />
-              <p className="text-primary-50">Practice with realistic market simulations</p>
-            </div>
-            <div className="flex items-start space-x-3">
-              <HiCheckCircle className="w-6 h-6 text-white flex-shrink-0 mt-1" />
-              <p className="text-primary-50">Earn achievements and track your progress</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

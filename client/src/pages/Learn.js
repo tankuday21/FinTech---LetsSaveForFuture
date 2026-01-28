@@ -30,11 +30,11 @@ const Learn = () => {
         // Check access for all modules
         const allModules = learningModules.flatMap(level => level.modules);
         const accessMap = {};
-        
+
         for (const module of allModules) {
           accessMap[module.id] = await canAccessModule(user.id, module.id);
         }
-        
+
         setModuleAccess(accessMap);
       } catch (error) {
         console.error('Error loading progress:', error);
@@ -61,9 +61,9 @@ const Learn = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b border-gray-200">
+      <nav className="bg-white/80 backdrop-blur-md border-b-2 border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
@@ -79,7 +79,7 @@ const Learn = () => {
                 </Link>
                 <Link
                   to="/learn"
-                  className="px-3 py-2 text-sm font-medium text-gray-900 hover:text-primary-600 transition-colors"
+                  className="px-4 py-2 text-sm font-bold text-gray-900 bg-green-50 rounded-xl border-2 border-green-100 transition-colors"
                 >
                   Learn
                 </Link>
@@ -88,9 +88,9 @@ const Learn = () => {
             <div className="flex items-center space-x-4">
               <Link
                 to="/profile"
-                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl border-2 border-transparent hover:border-gray-100 transition-all"
               >
-                <HiUser className="w-4 h-4" />
+                <HiUser className="w-5 h-5 text-gray-400" />
                 <span className="hidden sm:inline">Profile</span>
               </Link>
             </div>
@@ -99,12 +99,12 @@ const Learn = () => {
       </nav>
 
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="border-b-2 border-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">
+          <h1 className="text-5xl font-display font-bold text-gray-900 mb-2">
             Learning Path
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-xl text-gray-600 font-medium">
             Master personal finance through our structured curriculum
           </p>
         </div>
@@ -127,8 +127,8 @@ const Learn = () => {
             </div>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
-            <div 
-              className="bg-primary-600 h-3 rounded-full transition-all duration-500" 
+            <div
+              className="bg-primary-600 h-3 rounded-full transition-all duration-500"
               style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
@@ -138,76 +138,28 @@ const Learn = () => {
           </div>
         </div>
 
-        {/* Levels Grid */}
-        <div className="space-y-8">
-          {learningModules.map((level) => {
-            const colors = getLevelColor(level.color);
-            const isExpanded = selectedLevel === level.level;
-            const levelCompletedModules = level.modules.filter(m => completedModules.includes(m.id)).length;
-            const levelTotalModules = level.modules.length;
+        {/* All Modules Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {learningModules.flatMap(level =>
+            level.modules.map(module => ({
+              ...module,
+              levelColor: level.color,
+              levelName: level.title,
+              levelNumber: level.level
+            }))
+          ).map((module) => {
+            const colors = getLevelColor(module.levelColor);
 
             return (
-              <div key={level.level} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                {/* Level Header */}
-                <div 
-                  className={`${colors.bg} border-b ${colors.border} p-6 cursor-pointer hover:opacity-90 transition-opacity`}
-                  onClick={() => setSelectedLevel(isExpanded ? null : level.level)}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${colors.badge}`}>
-                          Level {level.level}
-                        </span>
-                        <span className="text-sm text-gray-600">{level.subtitle}</span>
-                      </div>
-                      <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">
-                        {level.title}
-                      </h3>
-                      <p className="text-gray-600 mb-3">{level.description}</p>
-                      <div className="flex items-center space-x-4 text-sm text-gray-600">
-                        <div className="flex items-center space-x-1">
-                          <HiClock className="w-4 h-4" />
-                          <span>{level.duration}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <HiCheckCircle className="w-4 h-4" />
-                          <span>{levelCompletedModules}/{levelTotalModules} Modules</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg 
-                          className={`w-6 h-6 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Modules Grid */}
-                {isExpanded && (
-                  <div className="p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {level.modules.map((module) => (
-                        <ModuleCard 
-                          key={module.id} 
-                          module={module} 
-                          colors={colors}
-                          isCompleted={completedModules.includes(module.id)}
-                          isLocked={!moduleAccess[module.id]}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+              <ModuleCard
+                key={module.id}
+                module={module}
+                colors={colors}
+                isCompleted={completedModules.includes(module.id)}
+                isLocked={!moduleAccess[module.id]}
+                levelName={module.levelName}
+                levelNumber={module.levelNumber}
+              />
             );
           })}
         </div>
@@ -216,17 +168,20 @@ const Learn = () => {
   );
 };
 
-const ModuleCard = ({ module, colors, isCompleted, isLocked }) => {
+const ModuleCard = ({ module, colors, isCompleted, isLocked, levelName, levelNumber }) => {
   const IconComponent = getModuleIcon(module.icon);
-  
+
   return (
     <Link
       to={isLocked ? '#' : `/learn/module/${module.id}`}
-      className={`block relative border ${colors.border} rounded-lg p-5 hover:shadow-md transition-all ${isLocked ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-primary-300'} ${isCompleted ? 'bg-green-50' : ''}`}
+      className={`block relative border-2 ${colors.border} rounded-2xl p-6 hover:shadow-[0_4px_0_0_#E2E8F0] hover:-translate-y-1 transition-all flex flex-col h-full ${isLocked ? 'opacity-60 cursor-not-allowed bg-gray-50' : 'cursor-pointer hover:border-green-300 bg-white'} ${isCompleted ? 'bg-green-50' : ''}`}
       onClick={(e) => isLocked && e.preventDefault()}
     >
-      {/* Lock or Completed Badge */}
-      <div className="absolute top-3 right-3">
+      {/* Header Badge */}
+      <div className="flex justify-between items-start mb-4">
+        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${colors.badge}`}>
+          Level {levelNumber}
+        </span>
         {isCompleted ? (
           <HiCheckCircle className="w-6 h-6 text-green-600" />
         ) : isLocked ? (
@@ -235,20 +190,34 @@ const ModuleCard = ({ module, colors, isCompleted, isLocked }) => {
       </div>
 
       {/* Module Icon */}
-      <div className={`w-12 h-12 ${colors.icon} rounded-lg flex items-center justify-center mb-3`}>
+      <div className={`w-12 h-12 ${colors.icon} rounded-lg flex items-center justify-center mb-4`}>
         <IconComponent className="w-6 h-6" />
       </div>
 
       {/* Module Info */}
-      <h4 className="font-semibold text-gray-900 mb-2 pr-8">
-        {module.title}
-      </h4>
-      <p className="text-sm text-gray-600 mb-3">
-        {module.description}
-      </p>
+      <div className="flex-grow">
+        <h4 className="font-semibold text-gray-900 mb-2 leading-tight">
+          {module.title}
+        </h4>
+        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+          {module.description}
+        </p>
+      </div>
+
+      {/* Topics */}
+      <div className="mb-4 flex flex-wrap gap-2">
+        {module.topics.slice(0, 2).map((topic, idx) => (
+          <span key={idx} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+            {topic}
+          </span>
+        ))}
+        {module.topics.length > 2 && (
+          <span className="text-xs text-gray-500 self-center">+{module.topics.length - 2}</span>
+        )}
+      </div>
 
       {/* Module Meta */}
-      <div className="flex items-center justify-between text-sm">
+      <div className="flex items-center justify-between text-sm pt-4 border-t border-gray-100 mt-auto">
         <div className="flex items-center space-x-1 text-gray-600">
           <HiClock className="w-4 h-4" />
           <span>{module.duration}</span>
@@ -259,22 +228,10 @@ const ModuleCard = ({ module, colors, isCompleted, isLocked }) => {
         </div>
       </div>
 
-      {/* Topics */}
-      <div className="mt-3 flex flex-wrap gap-2">
-        {module.topics.slice(0, 2).map((topic, idx) => (
-          <span key={idx} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-            {topic}
-          </span>
-        ))}
-        {module.topics.length > 2 && (
-          <span className="text-xs text-gray-500">+{module.topics.length - 2} more</span>
-        )}
-      </div>
-
       {/* Start/Continue Button */}
       {!isLocked && (
-        <div className="mt-4 w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-center">
-          {isCompleted ? 'Review Module' : 'Start Learning'}
+        <div className="mt-4 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-[0_4px_0_0_#15803D] active:shadow-none active:translate-y-1 text-center text-sm">
+          {isCompleted ? 'Review' : 'Start'}
         </div>
       )}
     </Link>

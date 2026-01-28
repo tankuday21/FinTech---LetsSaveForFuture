@@ -5,6 +5,8 @@ import { moduleContent } from '../data/moduleContent';
 import Quiz from '../components/Quiz';
 import QuizResults from '../components/QuizResults';
 import { HiArrowLeft, HiArrowRight, HiCheckCircle } from 'react-icons/hi2';
+import FingoButton from '../components/FingoButton';
+import FingoCard from '../components/FingoCard';
 import { useAuth } from '../context/AuthContext';
 import { completeModule } from '../services/progressService';
 
@@ -40,7 +42,7 @@ const ModuleContent = () => {
   const IconComponent = getModuleIcon(module.icon);
   const totalSections = content.sections.length;
   const hasQuiz = content.quiz && content.quiz.questions;
-  
+
   // Calculate progress including quiz
   const totalSteps = hasQuiz ? totalSections + 1 : totalSections;
   const currentStep = showQuiz ? totalSections : (quizScore !== null ? totalSteps : currentSection);
@@ -96,9 +98,9 @@ const ModuleContent = () => {
   const currentSectionData = content.sections[currentSection];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="bg-white/80 backdrop-blur-md border-b-2 border-gray-100 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between mb-3">
             <Link
@@ -120,9 +122,9 @@ const ModuleContent = () => {
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-gray-100 rounded-full h-3 border-2 border-gray-100">
             <div
-              className="bg-primary-600 h-2 rounded-full transition-all duration-300"
+              className="bg-green-500 h-full rounded-full transition-all duration-300 shadow-[0_2px_0_0_#15803D]"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -132,19 +134,19 @@ const ModuleContent = () => {
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Module Header */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-200">
+        <FingoCard className="mb-8">
           <div className="flex items-start space-x-4">
-            <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <IconComponent className="w-8 h-8 text-primary-600" />
+            <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center flex-shrink-0 border-2 border-green-200">
+              <IconComponent className="w-8 h-8 text-green-600" />
             </div>
             <div className="flex-1">
               <h1 className="text-3xl font-display font-bold text-gray-900 mb-2">
                 {module.title}
               </h1>
-              <p className="text-gray-600">{module.description}</p>
+              <p className="text-gray-600 font-medium">{module.description}</p>
             </div>
           </div>
-        </div>
+        </FingoCard>
 
         {/* Quiz Results */}
         {quizScore !== null ? (
@@ -171,44 +173,44 @@ const ModuleContent = () => {
         ) : (
           /* Section Content */
           <>
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-6 border border-gray-200">
-              <h2 className="text-2xl font-display font-bold text-gray-900 mb-6">
+            <FingoCard className="mb-8 p-8">
+              <h2 className="text-3xl font-display font-bold text-gray-900 mb-6">
                 {currentSectionData.title}
               </h2>
 
               {currentSectionData.content.map((block, index) => (
                 <ContentBlock key={index} block={block} />
               ))}
-            </div>
+            </FingoCard>
 
             {/* Navigation */}
             <div className="flex items-center justify-between">
               <button
                 onClick={handlePrevious}
                 disabled={currentSection === 0}
-                className="flex items-center space-x-2 px-6 py-3 text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex items-center space-x-2 px-6 py-3 font-bold text-gray-500 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-xl hover:bg-gray-100"
               >
                 <HiArrowLeft className="w-5 h-5" />
-                <span className="font-medium">Previous</span>
+                <span>Previous</span>
               </button>
 
-              <button
+              <FingoButton
                 onClick={handleNext}
-                className="flex items-center space-x-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
+                className="flex items-center space-x-2"
               >
                 <span>
                   {currentSection === totalSections - 1 && hasQuiz
                     ? 'Take Quiz'
                     : currentSection === totalSections - 1
-                    ? 'Complete Module'
-                    : 'Next Section'}
+                      ? 'Complete Module'
+                      : 'Next Section'}
                 </span>
                 {currentSection === totalSections - 1 ? (
                   <HiCheckCircle className="w-5 h-5" />
                 ) : (
                   <HiArrowRight className="w-5 h-5" />
                 )}
-              </button>
+              </FingoButton>
             </div>
           </>
         )}
@@ -239,8 +241,8 @@ const ContentBlock = ({ block }) => {
 
     case 'highlight':
       return (
-        <div className="bg-primary-50 border-l-4 border-primary-600 p-4 mb-4 rounded-r-lg">
-          <p className="text-primary-900 font-medium">{block.text}</p>
+        <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-4 rounded-r-xl">
+          <p className="text-green-900 font-bold text-lg">{block.text}</p>
         </div>
       );
 

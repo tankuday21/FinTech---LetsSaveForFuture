@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../services/supabase';
-import { 
-  HiTrophy, 
-  HiStar, 
+import {
+  HiTrophy,
+  HiStar,
   HiUser,
   HiArrowLeft,
   HiFire,
   HiAcademicCap
 } from 'react-icons/hi2';
+import FingoCard from '../components/FingoCard';
+import VersionBadge from '../components/VersionBadge';
 
 const Leaderboard = () => {
   const { user } = useAuth();
@@ -94,31 +96,32 @@ const Leaderboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
+      <VersionBadge />
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="bg-white/80 backdrop-blur-md border-b-2 border-gray-100 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Link
             to="/dashboard"
-            className="inline-flex items-center text-white hover:text-primary-100 transition-colors mb-4"
+            className="inline-flex items-center text-gray-500 hover:text-green-600 transition-colors mb-4 font-bold"
           >
             <HiArrowLeft className="w-5 h-5 mr-2" />
-            <span className="text-sm font-medium">Back to Dashboard</span>
+            <span className="text-sm">Back to Dashboard</span>
           </Link>
-          
+
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-display font-bold mb-2">
+              <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">
                 🏆 Leaderboard
               </h1>
-              <p className="text-primary-100">
+              <p className="text-gray-600 font-medium">
                 See how you rank against other learners
               </p>
             </div>
             {userRank && (
-              <div className="hidden md:block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                <p className="text-sm text-primary-100 mb-1">Your Rank</p>
-                <p className="text-3xl font-bold">#{userRank}</p>
+              <div className="hidden md:block bg-yellow-50 rounded-2xl p-4 border-2 border-yellow-200">
+                <p className="text-sm font-bold text-yellow-700 mb-1">Your Rank</p>
+                <p className="text-3xl font-display font-bold text-yellow-600">#{userRank}</p>
               </div>
             )}
           </div>
@@ -151,7 +154,7 @@ const Leaderboard = () => {
 
               {/* 1st Place */}
               <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mb-3 border-4 border-yellow-400 shadow-lg">
+                <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mb-3 border-4 border-yellow-400 shadow-[0_4px_0_0_#EAB308]">
                   <HiUser className="w-12 h-12 text-yellow-600" />
                 </div>
                 <div className="text-5xl mb-2">🥇</div>
@@ -189,11 +192,11 @@ const Leaderboard = () => {
         )}
 
         {/* Full Leaderboard Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">All Rankings</h2>
+        <FingoCard className="overflow-hidden p-0">
+          <div className="px-6 py-4 border-b border-gray-100">
+            <h2 className="text-xl font-bold text-gray-900">All Rankings</h2>
           </div>
-          
+
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
@@ -217,7 +220,7 @@ const Leaderboard = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {leaderboardData.map((entry) => (
-                  <tr 
+                  <tr
                     key={entry.user_id}
                     className={`${entry.isCurrentUser ? 'bg-primary-50' : 'hover:bg-gray-50'} transition-colors`}
                   >
@@ -285,7 +288,7 @@ const Leaderboard = () => {
               <p className="text-sm text-gray-400">Be the first to complete a module!</p>
             </div>
           )}
-        </div>
+        </FingoCard>
 
         {/* Motivational Message */}
         {userRank && userRank > 3 && (

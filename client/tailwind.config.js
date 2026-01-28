@@ -33,6 +33,13 @@ module.exports = {
         success: '#10b981',
         warning: '#f59e0b',
         danger: '#ef4444',
+        // Fingo Theme Colors
+        fingo: {
+          green: '#22C55E',
+          'green-dark': '#15803D',
+          bg: '#F9FDFC',
+          dot: '#E2E8F0',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

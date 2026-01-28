@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../services/supabase';
 import { HiArrowLeft, HiEnvelope } from 'react-icons/hi2';
+import FingoButton from '../components/FingoButton';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -29,17 +30,17 @@ const ForgotPassword = () => {
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <Link 
-            to="/login" 
+          <Link
+            to="/login"
             className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 mb-6 transition-colors"
           >
             <HiArrowLeft className="w-4 h-4 mr-2" />
             Back to login
           </Link>
-          
+
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <HiEnvelope className="w-8 h-8 text-primary-600" />
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <HiEnvelope className="w-8 h-8 text-green-600" />
             </div>
             <h2 className="text-4xl font-display font-bold text-gray-900 mb-2">
               Forgot password?
@@ -65,7 +66,7 @@ const ForgotPassword = () => {
             </p>
             <Link
               to="/login"
-              className="inline-block text-sm font-medium text-primary-600 hover:text-primary-500"
+              className="inline-block text-sm font-medium text-green-600 hover:text-green-500"
             >
               Back to login
             </Link>
@@ -90,22 +91,22 @@ const ForgotPassword = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                 placeholder="you@example.com"
               />
             </div>
 
-            <button
+            <FingoButton
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full"
             >
               {loading ? 'Sending...' : 'Reset password'}
-            </button>
+            </FingoButton>
 
             <div className="text-center">
               <Link to="/login" className="text-sm text-gray-600 hover:text-gray-900">
-                Remember your password? <span className="font-semibold text-primary-600">Sign in</span>
+                Remember your password? <span className="font-semibold text-green-600">Sign in</span>
               </Link>
             </div>
           </form>

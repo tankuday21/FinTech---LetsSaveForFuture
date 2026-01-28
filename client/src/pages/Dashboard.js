@@ -15,7 +15,7 @@ const Dashboard = () => {
   useEffect(() => {
     const loadProgress = async () => {
       if (!user) return;
-      
+
       try {
         const progress = await getUserProgress(user.id);
         setUserProgress(progress);
@@ -39,10 +39,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <VersionBadge />
       {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b border-gray-200">
+      <nav className="bg-white/80 backdrop-blur-md border-b-2 border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
@@ -52,7 +52,7 @@ const Dashboard = () => {
               <div className="hidden md:flex space-x-4">
                 <Link
                   to="/dashboard"
-                  className="px-3 py-2 text-sm font-medium text-gray-900 hover:text-primary-600 transition-colors"
+                  className="px-4 py-2 text-sm font-bold text-gray-900 bg-green-50 rounded-xl border-2 border-green-100 transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -67,9 +67,9 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <Link
                 to="/profile"
-                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl border-2 border-transparent hover:border-gray-100 transition-all"
               >
-                <HiUser className="w-4 h-4" />
+                <HiUser className="w-5 h-5 text-gray-400" />
                 <span className="hidden sm:inline">{user?.user_metadata?.full_name || 'Profile'}</span>
               </Link>
               <button
@@ -98,52 +98,52 @@ const Dashboard = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Total Points Card */}
-          <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-lg p-6 border-2 border-yellow-200 transform transition-all hover:scale-105 hover:shadow-xl">
+          <div className="bg-white rounded-3xl p-6 border-2 border-yellow-400 shadow-[0_4px_0_0_#EAB308] transform transition-all hover:scale-105 hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-yellow-700 mb-1">Total Points</p>
-                <p className="text-4xl font-bold text-yellow-600">
+                <p className="text-sm font-bold text-gray-500 mb-1">Total Points</p>
+                <p className="text-4xl font-display font-bold text-yellow-500">
                   {loading ? '...' : userProgress.total_points}
                 </p>
               </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                <HiStar className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center border-2 border-yellow-200">
+                <HiStar className="w-8 h-8 text-yellow-500" />
               </div>
             </div>
-            <div className="mt-3 text-xs text-yellow-600 font-medium">
+            <div className="mt-3 text-xs font-bold text-yellow-600 bg-yellow-50 inline-block px-3 py-1 rounded-lg">
               Keep earning! 🎯
             </div>
           </div>
 
           {/* Modules Completed Card */}
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-lg p-6 border-2 border-green-200 transform transition-all hover:scale-105 hover:shadow-xl">
+          <div className="bg-white rounded-3xl p-6 border-2 border-green-400 shadow-[0_4px_0_0_#22C55E] transform transition-all hover:scale-105 hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-green-700 mb-1">Modules Done</p>
-                <p className="text-4xl font-bold text-green-600">
+                <p className="text-sm font-bold text-gray-500 mb-1">Modules Done</p>
+                <p className="text-4xl font-display font-bold text-green-500">
                   {loading ? '...' : `${userProgress.modules_completed}/24`}
                 </p>
               </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12">
-                <HiAcademicCap className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center border-2 border-green-200">
+                <HiAcademicCap className="w-8 h-8 text-green-500" />
               </div>
             </div>
-            <div className="mt-3 text-xs text-green-600 font-medium">
+            <div className="mt-3 text-xs font-bold text-green-600 bg-green-50 inline-block px-3 py-1 rounded-lg">
               You're doing great! 🌟
             </div>
           </div>
 
           {/* Progress Card */}
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg p-6 border-2 border-purple-200 transform transition-all hover:scale-105 hover:shadow-xl">
+          <div className="bg-white rounded-3xl p-6 border-2 border-purple-400 shadow-[0_4px_0_0_#A855F7] transform transition-all hover:scale-105 hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-purple-700 mb-1">Progress</p>
-                <p className="text-4xl font-bold text-purple-600">
+                <p className="text-sm font-bold text-gray-500 mb-1">Progress</p>
+                <p className="text-4xl font-display font-bold text-purple-500">
                   {loading ? '...' : `${Math.round((userProgress.modules_completed / 24) * 100)}%`}
                 </p>
               </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                <HiChartBar className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center border-2 border-purple-200">
+                <HiChartBar className="w-8 h-8 text-purple-500" />
               </div>
             </div>
             <div className="mt-3 text-xs text-purple-600 font-medium">
@@ -152,19 +152,19 @@ const Dashboard = () => {
           </div>
 
           {/* Streak Card */}
-          <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-lg p-6 border-2 border-orange-300 transform transition-all hover:scale-105 hover:shadow-xl">
+          <div className="bg-white rounded-3xl p-6 border-2 border-orange-400 shadow-[0_4px_0_0_#F97316] transform transition-all hover:scale-105 hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-orange-700 mb-1">Current Streak</p>
-                <p className="text-4xl font-bold text-orange-600">
+                <p className="text-sm font-bold text-gray-500 mb-1">Current Streak</p>
+                <p className="text-4xl font-display font-bold text-orange-500">
                   {loading ? '...' : userProgress.current_streak || 0}
                 </p>
               </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
+              <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center border-2 border-orange-200 animate-pulse">
                 <span className="text-4xl">🔥</span>
               </div>
             </div>
-            <div className="mt-3 text-xs text-orange-600 font-medium">
+            <div className="mt-3 text-xs font-bold text-orange-600 bg-orange-50 inline-block px-3 py-1 rounded-lg">
               Best: {userProgress.longest_streak || 0} days 💪
             </div>
           </div>

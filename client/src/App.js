@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Login from './pages/Login';
+import Landing from './pages/Landing';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
@@ -16,7 +17,7 @@ import { testSupabaseConnection } from './utils/testSupabase';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -24,18 +25,18 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  
+
   return user ? children : <Navigate to="/login" />;
 };
 
 function AnimatedRoutes() {
   const location = useLocation();
-  
+
   useEffect(() => {
     // Test Supabase connection on app load
     testSupabaseConnection();
   }, []);
-  
+
   return (
     <div className="transition-wrapper">
       <TransitionGroup>
@@ -45,66 +46,67 @@ function AnimatedRoutes() {
           classNames="page"
         >
           <Routes location={location}>
+            <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route 
-              path="/dashboard" 
+            <Route
+              path="/dashboard"
               element={
                 <PrivateRoute>
                   <Dashboard />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/learn" 
+            <Route
+              path="/learn"
               element={
                 <PrivateRoute>
                   <Learn />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/learn/module/:moduleId" 
+            <Route
+              path="/learn/module/:moduleId"
               element={
                 <PrivateRoute>
                   <ModuleContent />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/profile" 
+            <Route
+              path="/profile"
               element={
                 <PrivateRoute>
                   <Profile />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/leaderboard" 
+            <Route
+              path="/leaderboard"
               element={
                 <PrivateRoute>
                   <Leaderboard />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/calculators" 
+            <Route
+              path="/calculators"
               element={
                 <PrivateRoute>
                   <Calculators />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route 
-              path="/simulation" 
+            <Route
+              path="/simulation"
               element={
                 <PrivateRoute>
                   <Simulation />
                 </PrivateRoute>
-              } 
+              }
             />
-            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>

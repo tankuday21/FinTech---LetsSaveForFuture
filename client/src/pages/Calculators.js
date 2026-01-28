@@ -2,34 +2,36 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomSlider from '../components/CustomSlider';
 import VersionBadge from '../components/VersionBadge';
-import { 
+import {
   HiArrowLeft,
   HiCalculator,
   HiCurrencyRupee,
   HiChartBar,
   HiShieldCheck
 } from 'react-icons/hi2';
+import FingoButton from '../components/FingoButton';
+import FingoCard from '../components/FingoCard';
 
 const Calculators = () => {
   const [activeCalculator, setActiveCalculator] = useState('emi');
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <VersionBadge />
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white/80 backdrop-blur-md border-b-2 border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Link
             to="/dashboard"
-            className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-4"
+            className="inline-flex items-center text-gray-500 hover:text-green-600 transition-colors mb-4 font-bold"
           >
             <HiArrowLeft className="w-5 h-5 mr-2" />
-            <span className="text-sm font-medium">Back to Dashboard</span>
+            <span className="text-sm">Back to Dashboard</span>
           </Link>
           <h1 className="text-4xl font-display font-bold text-gray-900 mb-2">
             Financial Calculators
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 font-medium">
             Plan your finances with our easy-to-use calculators
           </p>
         </div>
@@ -40,16 +42,15 @@ const Calculators = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Calculator Menu */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Calculators</h2>
+            <FingoCard className="sticky top-24 p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4 px-2">Calculators</h2>
               <div className="space-y-2">
                 <button
                   onClick={() => setActiveCalculator('emi')}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    activeCalculator === 'emi'
-                      ? 'bg-primary-50 text-primary-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={`w-full text-left px-4 py-3 rounded-xl transition-all font-bold ${activeCalculator === 'emi'
+                    ? 'bg-green-50 text-green-700 border-2 border-green-200 shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-50 border-2 border-transparent'
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
                     <HiCalculator className="w-5 h-5" />
@@ -58,11 +59,10 @@ const Calculators = () => {
                 </button>
                 <button
                   onClick={() => setActiveCalculator('sip')}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    activeCalculator === 'sip'
-                      ? 'bg-primary-50 text-primary-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={`w-full text-left px-4 py-3 rounded-xl transition-all font-bold ${activeCalculator === 'sip'
+                    ? 'bg-green-50 text-green-700 border-2 border-green-200 shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-50 border-2 border-transparent'
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
                     <HiChartBar className="w-5 h-5" />
@@ -71,11 +71,10 @@ const Calculators = () => {
                 </button>
                 <button
                   onClick={() => setActiveCalculator('emergency')}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    activeCalculator === 'emergency'
-                      ? 'bg-primary-50 text-primary-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={`w-full text-left px-4 py-3 rounded-xl transition-all font-bold ${activeCalculator === 'emergency'
+                    ? 'bg-green-50 text-green-700 border-2 border-green-200 shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-50 border-2 border-transparent'
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
                     <HiShieldCheck className="w-5 h-5" />
@@ -84,11 +83,10 @@ const Calculators = () => {
                 </button>
                 <button
                   onClick={() => setActiveCalculator('compound')}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    activeCalculator === 'compound'
-                      ? 'bg-primary-50 text-primary-700 font-medium'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={`w-full text-left px-4 py-3 rounded-xl transition-all font-bold ${activeCalculator === 'compound'
+                    ? 'bg-green-50 text-green-700 border-2 border-green-200 shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-50 border-2 border-transparent'
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
                     <HiCurrencyRupee className="w-5 h-5" />
@@ -96,7 +94,7 @@ const Calculators = () => {
                   </div>
                 </button>
               </div>
-            </div>
+            </FingoCard>
           </div>
 
           {/* Calculator Content */}
@@ -137,9 +135,9 @@ const EMICalculator = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <FingoCard className="p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">EMI Calculator</h2>
-      
+
       <div className="space-y-6">
         <CustomSlider
           label="Loan Amount"
@@ -174,12 +172,9 @@ const EMICalculator = () => {
           color="blue"
         />
 
-        <button
-          onClick={calculateEMI}
-          className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
-        >
+        <FingoButton onClick={calculateEMI} className="w-full">
           Calculate EMI
-        </button>
+        </FingoButton>
 
         {result && (
           <div className="mt-6 space-y-4">
@@ -205,7 +200,7 @@ const EMICalculator = () => {
           </div>
         )}
       </div>
-    </div>
+    </FingoCard>
   );
 };
 
@@ -233,9 +228,9 @@ const SIPCalculator = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <FingoCard className="p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">SIP Calculator</h2>
-      
+
       <div className="space-y-6">
         <CustomSlider
           label="Monthly Investment"
@@ -270,12 +265,9 @@ const SIPCalculator = () => {
           color="blue"
         />
 
-        <button
-          onClick={calculateSIP}
-          className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
-        >
+        <FingoButton onClick={calculateSIP} className="w-full">
           Calculate Returns
-        </button>
+        </FingoButton>
 
         {result && (
           <div className="mt-6 space-y-4">
@@ -297,7 +289,7 @@ const SIPCalculator = () => {
           </div>
         )}
       </div>
-    </div>
+    </FingoCard>
   );
 };
 
@@ -312,9 +304,9 @@ const EmergencyFundCalculator = () => {
   const progress = Math.min(100, (currentSavings / targetFund) * 100);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <FingoCard className="p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Emergency Fund Calculator</h2>
-      
+
       <div className="space-y-6">
         <CustomSlider
           label="Monthly Expenses"
@@ -390,7 +382,7 @@ const EmergencyFundCalculator = () => {
           )}
         </div>
       </div>
-    </div>
+    </FingoCard>
   );
 };
 
@@ -419,9 +411,9 @@ const CompoundInterestCalculator = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <FingoCard className="p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Compound Interest Calculator</h2>
-      
+
       <div className="space-y-6">
         <CustomSlider
           label="Principal Amount"
@@ -473,12 +465,9 @@ const CompoundInterestCalculator = () => {
           </select>
         </div>
 
-        <button
-          onClick={calculateCompound}
-          className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
-        >
+        <FingoButton onClick={calculateCompound} className="w-full">
           Calculate
-        </button>
+        </FingoButton>
 
         {result && (
           <div className="mt-6 space-y-4">
@@ -500,7 +489,7 @@ const CompoundInterestCalculator = () => {
           </div>
         )}
       </div>
-    </div>
+    </FingoCard>
   );
 };
 

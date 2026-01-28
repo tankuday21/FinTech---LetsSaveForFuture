@@ -4,6 +4,8 @@ import { HiHome, HiHeart } from 'react-icons/hi2';
 import { getRandomEvent, monthlyExpenses, getTotalRequiredExpenses } from '../data/simulationEvents';
 import VersionBadge from '../components/VersionBadge';
 import CelebrationModal from '../components/CelebrationModal';
+import FingoButton from '../components/FingoButton';
+import FingoCard from '../components/FingoCard';
 
 const Simulation = () => {
   // Game state
@@ -17,10 +19,10 @@ const Simulation = () => {
   const [achievements, setAchievements] = useState([]);
   const [showCelebration, setShowCelebration] = useState(false);
   const [celebrationData, setCelebrationData] = useState({});
-  
+
   // Character selection
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-  
+
   const characters = [
     { id: 1, emoji: '👨‍💼', name: 'Rahul', description: 'Young Professional' },
     { id: 2, emoji: '👩‍💻', name: 'Priya', description: 'Tech Enthusiast' },
@@ -42,7 +44,7 @@ const Simulation = () => {
     const salary = 50000;
     // Add salary
     setBalance(prev => prev + salary);
-    
+
     // Generate random event
     const event = getRandomEvent(currentMonth);
     setCurrentEvent(event);
@@ -76,57 +78,57 @@ const Simulation = () => {
   const endMonth = () => {
     const requiredExpenses = getTotalRequiredExpenses();
     const newBalance = balance - requiredExpenses;
-    
+
     // Calculate savings (10% of remaining)
     const monthlySavings = Math.max(0, Math.floor(newBalance * 0.1));
-    
+
     setBalance(newBalance - monthlySavings);
     setSavings(prev => prev + monthlySavings);
     setEmergencyFund(prev => prev + monthlySavings);
-    
+
     // Update financial health
     const healthScore = calculateFinancialHealth(newBalance, emergencyFund + monthlySavings);
     setFinancialHealth(healthScore);
-    
+
     // Check achievements
     checkAchievements(emergencyFund + monthlySavings, currentMonth);
-    
+
     setGameState('monthSummary');
   };
 
   // Calculate financial health score
   const calculateFinancialHealth = (currentBalance, currentEmergencyFund) => {
     let score = 50;
-    
+
     // Balance factor
     if (currentBalance > 50000) score += 20;
     else if (currentBalance > 20000) score += 10;
     else if (currentBalance < 0) score -= 30;
-    
+
     // Emergency fund factor
     if (currentEmergencyFund > 100000) score += 30;
     else if (currentEmergencyFund > 50000) score += 20;
     else if (currentEmergencyFund > 20000) score += 10;
-    
+
     return Math.max(0, Math.min(100, score));
   };
 
   // Check achievements
   const checkAchievements = (currentEmergencyFund, month) => {
     const newAchievements = [];
-    
+
     if (month === 3 && !achievements.includes('first_quarter')) {
       newAchievements.push({ id: 'first_quarter', title: 'First Quarter!', emoji: '🎯' });
     }
-    
+
     if (currentEmergencyFund >= 50000 && !achievements.includes('saver')) {
       newAchievements.push({ id: 'saver', title: 'Smart Saver!', emoji: '💰' });
     }
-    
+
     if (currentEmergencyFund >= 100000 && !achievements.includes('emergency_master')) {
       newAchievements.push({ id: 'emergency_master', title: 'Emergency Fund Master!', emoji: '🛡️' });
     }
-    
+
     if (newAchievements.length > 0) {
       setAchievements(prev => [...prev, ...newAchievements.map(a => a.id)]);
       setCelebrationData({
@@ -164,7 +166,7 @@ const Simulation = () => {
 
   // Welcome Screen
   const renderWelcome = () => (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-4xl w-full">
         <div className="text-center mb-8">
           <div className="text-6xl mb-4 animate-bounce">🎮</div>
@@ -180,7 +182,7 @@ const Simulation = () => {
         </div>
 
         {/* Character Selection */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+        <FingoCard className="p-8 mb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Choose Your Character
           </h2>
@@ -189,11 +191,10 @@ const Simulation = () => {
               <button
                 key={char.id}
                 onClick={() => setSelectedCharacter(char)}
-                className={`p-6 rounded-2xl border-4 transition-all transform hover:scale-105 ${
-                  selectedCharacter?.id === char.id
+                className={`p-6 rounded-2xl border-4 transition-all transform hover:scale-105 ${selectedCharacter?.id === char.id
                     ? 'border-purple-500 bg-purple-50 shadow-lg'
                     : 'border-gray-200 hover:border-purple-300'
-                }`}
+                  }`}
               >
                 <div className="text-6xl mb-3">{char.emoji}</div>
                 <div className="font-bold text-gray-900">{char.name}</div>
@@ -201,7 +202,7 @@ const Simulation = () => {
               </button>
             ))}
           </div>
-        </div>
+        </FingoCard>
 
         {/* Game Info */}
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl shadow-2xl p-8 text-white">
@@ -240,17 +241,14 @@ const Simulation = () => {
 
         {/* Start Button */}
         <div className="text-center mt-8">
-          <button
+          <FingoButton
             onClick={startGame}
             disabled={!selectedCharacter}
-            className={`px-12 py-4 rounded-2xl font-bold text-xl transition-all transform ${
-              selectedCharacter
-                ? 'bg-gradient-to-r from-green-400 to-emerald-600 text-white hover:scale-105 shadow-2xl'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+            size="lg"
+            className="px-12 py-4"
           >
             {selectedCharacter ? "Let's Start! 🚀" : 'Select a Character First'}
-          </button>
+          </FingoButton>
         </div>
 
         <div className="text-center mt-6">
@@ -266,9 +264,9 @@ const Simulation = () => {
   const renderPlaying = () => (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <VersionBadge />
-      
+
       {/* Header */}
-      <div className="bg-white shadow-lg border-b-4 border-purple-200">
+      <div className="bg-white/80 backdrop-blur-md border-b-2 border-gray-100 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -311,15 +309,14 @@ const Simulation = () => {
 
         {/* Event Card */}
         {currentEvent ? (
-          <div className="bg-white rounded-3xl shadow-2xl p-8 mb-8 border-4 border-purple-200">
+          <FingoCard className="p-8 mb-8 border-4 border-purple-200">
             <div className="text-center">
               <div className="text-7xl mb-4 animate-bounce">{currentEvent.emoji}</div>
               <h2 className="text-3xl font-bold text-gray-900 mb-3">{currentEvent.title}</h2>
               <p className="text-xl text-gray-600 mb-6">{currentEvent.description}</p>
-              <div className={`text-3xl font-bold mb-8 ${
-                currentEvent.type === 'good' ? 'text-green-600' : 
-                currentEvent.type === 'bad' ? 'text-red-600' : 'text-yellow-600'
-              }`}>
+              <div className={`text-3xl font-bold mb-8 ${currentEvent.type === 'good' ? 'text-green-600' :
+                  currentEvent.type === 'bad' ? 'text-red-600' : 'text-yellow-600'
+                }`}>
                 {currentEvent.type === 'good' ? '+' : currentEvent.type === 'bad' ? '-' : ''}₹{currentEvent.amount.toLocaleString()}
               </div>
 
@@ -330,33 +327,33 @@ const Simulation = () => {
                     <button
                       key={idx}
                       onClick={() => handleEventDecision(choice.impact)}
-                      className={`p-6 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg ${
-                        choice.impact === 'spend'
+                      className={`p-6 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg ${choice.impact === 'spend'
                           ? 'bg-gradient-to-r from-red-400 to-pink-600 text-white'
                           : 'bg-gradient-to-r from-green-400 to-emerald-600 text-white'
-                      }`}
+                        }`}
                     >
                       {choice.text}
                     </button>
                   ))}
                 </div>
               ) : (
-                <button
+                <FingoButton
                   onClick={() => handleEventDecision('accept')}
-                  className="px-12 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg"
+                  size="lg"
+                  className="w-full"
                 >
                   Continue →
-                </button>
+                </FingoButton>
               )}
             </div>
-          </div>
+          </FingoCard>
         ) : (
           /* Monthly Expenses */
-          <div className="bg-white rounded-3xl shadow-2xl p-8 mb-8">
+          <FingoCard className="p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
               Monthly Expenses
             </h2>
-            
+
             <div className="space-y-3 mb-8">
               {Object.values(monthlyExpenses).map((expense, idx) => (
                 <div key={idx} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
@@ -372,7 +369,7 @@ const Simulation = () => {
                   <span className="font-bold text-gray-900">₹{expense.amount.toLocaleString()}</span>
                 </div>
               ))}
-              
+
               <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl border-2 border-purple-300">
                 <span className="font-bold text-gray-900 text-lg">Total</span>
                 <span className="font-bold text-purple-600 text-xl">
@@ -382,14 +379,15 @@ const Simulation = () => {
             </div>
 
             <div className="text-center">
-              <button
+              <FingoButton
                 onClick={endMonth}
-                className="px-12 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg"
+                size="lg"
+                className="w-full"
               >
                 End Month & Save 💰
-              </button>
+              </FingoButton>
             </div>
-          </div>
+          </FingoCard>
         )}
       </div>
     </div>
@@ -397,9 +395,9 @@ const Simulation = () => {
 
   // Month Summary Screen
   const renderMonthSummary = () => (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
-        <div className="bg-white rounded-3xl shadow-2xl p-8">
+        <FingoCard className="p-8">
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">📊</div>
             <h2 className="text-4xl font-bold text-gray-900 mb-2">
@@ -415,7 +413,7 @@ const Simulation = () => {
               <span>{Math.round((currentMonth / 12) * 100)}%</span>
             </div>
             <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-green-400 to-emerald-600 transition-all duration-500"
                 style={{ width: `${(currentMonth / 12) * 100}%` }}
               />
@@ -446,35 +444,36 @@ const Simulation = () => {
           <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-2xl mb-8 text-center">
             <p className="text-lg font-semibold text-gray-900">
               {financialHealth >= 80 ? "🌟 Excellent! You're crushing it!" :
-               financialHealth >= 60 ? "👍 Good job! Keep it up!" :
-               financialHealth >= 40 ? "💪 You're learning! Stay focused!" :
-               "🎯 Don't give up! Every decision matters!"}
+                financialHealth >= 60 ? "👍 Good job! Keep it up!" :
+                  financialHealth >= 40 ? "💪 You're learning! Stay focused!" :
+                    "🎯 Don't give up! Every decision matters!"}
             </p>
           </div>
 
           {/* Continue Button */}
-          <button
+          <FingoButton
             onClick={continueToNextMonth}
-            className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg"
+            size="lg"
+            className="w-full"
           >
             {currentMonth < 12 ? `Continue to ${monthNames[currentMonth]} →` : 'See Final Results 🎉'}
-          </button>
-        </div>
+          </FingoButton>
+        </FingoCard>
       </div>
     </div>
   );
 
   // Final Results Screen
   const renderFinalResults = () => {
-    const grade = financialHealth >= 80 ? 'A+' : 
-                  financialHealth >= 70 ? 'A' :
-                  financialHealth >= 60 ? 'B' :
-                  financialHealth >= 50 ? 'C' : 'D';
-    
+    const grade = financialHealth >= 80 ? 'A+' :
+      financialHealth >= 70 ? 'A' :
+        financialHealth >= 60 ? 'B' :
+          financialHealth >= 50 ? 'C' : 'D';
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-4">
         <div className="max-w-3xl w-full">
-          <div className="bg-white rounded-3xl shadow-2xl p-8">
+          <FingoCard className="p-8">
             <div className="text-center mb-8">
               <div className="text-8xl mb-4 animate-bounce">🏆</div>
               <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-orange-600 mb-4">
@@ -534,20 +533,21 @@ const Simulation = () => {
 
             {/* Action Buttons */}
             <div className="grid md:grid-cols-2 gap-4">
-              <button
+              <FingoButton
                 onClick={restartGame}
-                className="py-4 bg-gradient-to-r from-green-400 to-emerald-600 text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-lg"
+                size="lg"
               >
                 Play Again 🔄
-              </button>
+              </FingoButton>
               <Link
                 to="/dashboard"
-                className="py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-lg text-center"
               >
-                Back to Dashboard 🏠
+                <FingoButton size="lg" variant="secondary" className="w-full h-full">
+                  Back to Dashboard 🏠
+                </FingoButton>
               </Link>
             </div>
-          </div>
+          </FingoCard>
         </div>
       </div>
     );
@@ -559,7 +559,7 @@ const Simulation = () => {
       {gameState === 'playing' && renderPlaying()}
       {gameState === 'monthSummary' && renderMonthSummary()}
       {gameState === 'finalResults' && renderFinalResults()}
-      
+
       <CelebrationModal
         show={showCelebration}
         onClose={() => setShowCelebration(false)}
