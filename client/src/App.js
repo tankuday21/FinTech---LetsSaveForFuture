@@ -10,6 +10,7 @@ import ModuleContent from './pages/ModuleContent';
 import Profile from './pages/Profile';
 import Leaderboard from './pages/Leaderboard';
 import Calculators from './pages/Calculators';
+import Simulation from './pages/Simulation';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { testSupabaseConnection } from './utils/testSupabase';
 
@@ -92,6 +93,14 @@ function AnimatedRoutes() {
               element={
                 <PrivateRoute>
                   <Calculators />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/simulation" 
+              element={
+                <PrivateRoute>
+                  <Simulation />
                 </PrivateRoute>
               } 
             />

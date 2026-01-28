@@ -220,21 +220,21 @@ const Dashboard = () => {
             </div>
           </Link>
 
-          <div className="group bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl shadow-lg p-6 border-2 border-pink-300 opacity-75 cursor-not-allowed">
-            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
+          <Link to="/simulation" className="group bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl shadow-lg p-6 border-2 border-pink-300 hover:shadow-2xl transition-all transform hover:scale-105 hover:rotate-1">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <HiChartBar className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">
               Simulations
             </h3>
             <p className="text-pink-100 text-sm mb-4">
-              Coming soon! 🎮
+              Live your financial life! 🎮
             </p>
             <div className="flex items-center text-white text-sm font-bold">
-              <span>Stay tuned</span>
-              <span className="ml-2">🔒</span>
+              <span>Start playing</span>
+              <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
             </div>
-          </div>
+          </Link>
         </div>
       </main>
     </div>

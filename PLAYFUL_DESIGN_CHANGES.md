@@ -1,4 +1,4 @@
-# 🎨 Playful Design Transformation (v1.3.0)
+# 🎨 Playful Design Transformation (v1.4.0)
 
 ## Summary of Changes
 
@@ -12,6 +12,7 @@ I've transformed your FinLearn platform into a playful, Duolingo-style gamified 
    - Vibrant action cards with glass-morphism
    - Motivational messages
    - Pulsing streak fire emoji
+   - Active Simulation card (now clickable!)
 
 2. **Quiz Results** - Celebration mode:
    - Confetti animation
@@ -26,7 +27,21 @@ I've transformed your FinLearn platform into a playful, Duolingo-style gamified 
    - Color-coded by calculator type
    - Smooth drag animations
 
-4. **Version Badge** - v1.3.0:
+4. **Simulation** - NEW! 🎮:
+   - 12-month financial life simulator
+   - Character selection (4 characters)
+   - Random events (good, bad, temptations)
+   - Monthly budget management
+   - Emergency fund building
+   - Financial health score (0-100)
+   - Achievement system
+   - Month-by-month progress
+   - Final results with grade
+   - Playful animations throughout
+   - Gradient backgrounds
+   - Interactive decision cards
+
+5. **Version Badge** - v1.4.0:
    - Fixed top-right position
    - Frosted glass effect
    - Visible on all pages
@@ -78,6 +93,7 @@ Due to file size, I recommend transforming the remaining screens one at a time:
 - Dashboard: ✅ Complete
 - Quiz/Results: ✅ Complete
 - Calculators: ✅ Complete
+- Simulation: ✅ Complete (NEW!)
 - Learn: ⏳ Needs update
 - Profile: ⏳ Needs update
 - Leaderboard: ⏳ Needs update
