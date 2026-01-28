@@ -4,6 +4,7 @@ import { learningModules, getLevelColor, getModuleIcon } from '../data/modules';
 import { HiLockClosed, HiClock, HiStar, HiCheckCircle, HiUser } from 'react-icons/hi2';
 import { useAuth } from '../context/AuthContext';
 import { getUserProgress, getModuleCompletions, canAccessModule } from '../services/progressService';
+import VersionBadge from '../components/VersionBadge';
 
 const Learn = () => {
   const { user } = useAuth();
