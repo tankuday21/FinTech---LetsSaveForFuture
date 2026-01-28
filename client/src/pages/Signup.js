@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signUp } from '../services/supabase';
 import { HiArrowLeft } from 'react-icons/hi2';
 import FingoButton from '../components/FingoButton';
+import FingoLogo from '../assets/logo.jpg';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -58,6 +59,9 @@ const Signup = () => {
 
         <div className="max-w-md w-full mx-auto space-y-8">
           <div>
+            <div className="flex justify-center mb-4">
+              <img src={FingoLogo} alt="Fingo Logo" className="h-28 w-auto rounded-2xl shadow-lg" />
+            </div>
             <h2 className="text-4xl font-display font-bold text-gray-900 mb-2">
               Start Your Journey 🚀
             </h2>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.jpg';
 import { learningModules, getLevelColor, getModuleIcon } from '../data/modules';
 import { HiLockClosed, HiClock, HiStar, HiCheckCircle, HiUser } from 'react-icons/hi2';
 import { useAuth } from '../context/AuthContext';
@@ -66,8 +67,8 @@ const Learn = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
-              <Link to="/dashboard" className="text-2xl font-display font-bold text-primary-600">
-                FinLearn
+              <Link to="/dashboard" className="flex items-center">
+                <img src={logo} alt="FinLearn" className="h-14 w-auto rounded-lg shadow-sm" />
               </Link>
               <div className="hidden md:flex space-x-4">
                 <Link

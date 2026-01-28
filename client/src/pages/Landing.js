@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.jpg';
 import {
   HiCheckCircle,
   HiXCircle,
@@ -8,6 +9,10 @@ import {
   HiQuestionMarkCircle,
   HiMoon
 } from 'react-icons/hi2';
+
+// ... (existing imports)
+
+// ...
 
 // Theme Colors matching the reference
 
@@ -52,8 +57,8 @@ const Landing = () => {
       {/* Navbar */}
       <nav className="fixed w-full z-50 bg-[#F9FDFC]/90 backdrop-blur-sm pt-6 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-1">
-            <span className="text-3xl font-display font-extrabold text-green-500 tracking-tight">FinLearn</span>
+          <div className="flex items-center gap-2">
+            <img src={logo} alt="FinLearn Logo" className="h-20 w-auto rounded-xl shadow-sm" />
           </div>
           <div className="flex items-center gap-4">
             <button className="font-bold text-gray-700 hover:text-green-600 transition-colors">Contact Us</button>

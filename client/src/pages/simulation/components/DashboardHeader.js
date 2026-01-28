@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSimulation } from '../../../context/SimulationContext';
-import { HiHeart, HiBriefcase, HiCurrencyRupee, HiLightningBolt, HiChartBar } from 'react-icons/hi'; // Updated icons
+import { HiHeart, HiBriefcase, HiCurrencyRupee, HiLightningBolt, HiChartBar } from 'react-icons/hi';
+import logo from '../../../assets/logo.jpg';
 
 const DashboardHeader = () => {
     const { stats, currentMonth, year, calculateNetWorth } = useSimulation();
@@ -12,7 +13,8 @@ const DashboardHeader = () => {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
 
                 {/* Date & Title */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
+                    <img src={logo} alt="FinLearn" className="h-20 w-auto rounded-lg shadow-md hover:scale-105 transition-transform" />
                     <div className="bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full text-sm">
                         {year} • Month {currentMonth}
                     </div>

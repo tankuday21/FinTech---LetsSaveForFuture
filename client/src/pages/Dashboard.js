@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import logo from '../assets/logo.jpg';
 import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
 import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser, HiCalculator } from 'react-icons/hi2';
@@ -46,9 +47,9 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
-              <h1 className="text-2xl font-display font-bold text-primary-600">
-                FinLearn
-              </h1>
+              <Link to="/dashboard" className="flex items-center">
+                <img src={logo} alt="FinLearn" className="h-14 w-auto rounded-lg shadow-sm" />
+              </Link>
               <div className="hidden md:flex space-x-4">
                 <Link
                   to="/dashboard"
