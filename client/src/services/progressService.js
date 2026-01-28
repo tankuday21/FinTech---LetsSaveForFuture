@@ -92,6 +92,7 @@ export const isModuleCompleted = async (userId, moduleId) => {
 // Mark module as completed
 export const completeModule = async (userId, moduleId, quizScore, quizTotal, pointsEarned) => {
   try {
+    // First, save the module completion
     const { data, error } = await supabase
       .from('module_completions')
       .upsert([
@@ -110,9 +111,57 @@ export const completeModule = async (userId, moduleId, quizScore, quizTotal, poi
       .select();
 
     if (error) throw error;
+
+    // Then, update the user's overall progress
+    await updateUserProgress(userId);
+
     return data;
   } catch (error) {
     console.error('Error completing module:', error);
+    throw error;
+  }
+};
+
+// Update user's overall progress by recalculating from module completions
+export const updateUserProgress = async (userId) => {
+  try {
+    // Get all completed modules for this user
+    const { data: completions, error: completionsError } = await supabase
+      .from('module_completions')
+      .select('points_earned')
+      .eq('user_id', userId)
+      .eq('completed', true);
+
+    if (completionsError) throw completionsError;
+
+    // Calculate totals
+    const totalPoints = completions.reduce((sum, c) => sum + (c.points_earned || 0), 0);
+    const modulesCompleted = completions.length;
+
+    // Get user's full name from auth metadata
+    const { data: { user } } = await supabase.auth.getUser();
+    const userName = user?.user_metadata?.full_name || 'Anonymous User';
+
+    // Update or insert user progress
+    const { error: updateError } = await supabase
+      .from('user_progress')
+      .upsert([
+        {
+          user_id: userId,
+          user_name: userName,
+          total_points: totalPoints,
+          modules_completed: modulesCompleted,
+          last_activity_date: new Date().toISOString()
+        }
+      ], {
+        onConflict: 'user_id'
+      });
+
+    if (updateError) throw updateError;
+
+    console.log(`Updated progress: ${modulesCompleted} modules, ${totalPoints} points`);
+  } catch (error) {
+    console.error('Error updating user progress:', error);
     throw error;
   }
 };

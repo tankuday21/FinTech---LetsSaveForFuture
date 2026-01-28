@@ -81,7 +81,7 @@ const Landing = () => {
           <p className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-4">
             say goodbye to boring finance lessons.
           </p>
-          <p className="text-sm text-gray-500 mb-8 font-medium">(No signup required.)</p>
+          
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
             <Link

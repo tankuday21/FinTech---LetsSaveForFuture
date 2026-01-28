@@ -6,6 +6,7 @@ import { signOut } from '../services/supabase';
 import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser, HiCalculator } from 'react-icons/hi2';
 import { getUserProgress } from '../services/progressService';
 import { updateCurrentUserName } from '../utils/updateUserNames';
+import { syncCurrentUserProgress } from '../utils/syncAllProgress';
 import VersionBadge from '../components/VersionBadge';
 
 const Dashboard = () => {
@@ -19,6 +20,9 @@ const Dashboard = () => {
       if (!user) return;
 
       try {
+        // Sync user progress from module completions
+        await syncCurrentUserProgress();
+        
         // Update user name in progress record
         await updateCurrentUserName();
         
