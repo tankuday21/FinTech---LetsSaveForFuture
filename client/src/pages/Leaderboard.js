@@ -23,7 +23,7 @@ const Leaderboard = () => {
     try {
       setLoading(true);
 
-      // Get all users with their progress
+      // Get all users with their progress and profile data
       const { data, error } = await supabase
         .from('user_progress')
         .select(`
@@ -31,26 +31,21 @@ const Leaderboard = () => {
           total_points,
           modules_completed,
           current_streak,
-          longest_streak
+          longest_streak,
+          user_name
         `)
         .order('total_points', { ascending: false })
         .limit(100);
 
       if (error) throw error;
 
-      // Get user details for each entry
-      const leaderboardWithUsers = await Promise.all(
-        data.map(async (entry, index) => {
-          const { data: userData } = await supabase.auth.admin.getUserById(entry.user_id);
-          return {
-            ...entry,
-            rank: index + 1,
-            name: userData?.user?.user_metadata?.full_name || 'Anonymous User',
-            email: userData?.user?.email || '',
-            isCurrentUser: entry.user_id === user?.id
-          };
-        })
-      );
+      // Map the data with rank and current user flag
+      const leaderboardWithUsers = data.map((entry, index) => ({
+        ...entry,
+        rank: index + 1,
+        name: entry.user_name || 'Anonymous User',
+        isCurrentUser: entry.user_id === user?.id
+      }));
 
       setLeaderboardData(leaderboardWithUsers);
 

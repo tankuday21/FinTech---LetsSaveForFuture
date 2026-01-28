@@ -15,11 +15,16 @@ export const getUserProgress = async (userId) => {
 
     // If no progress exists, create initial record
     if (!data) {
+      // Get user's full name from auth metadata
+      const { data: { user } } = await supabase.auth.getUser();
+      const userName = user?.user_metadata?.full_name || 'Anonymous User';
+
       const { data: newProgress, error: insertError } = await supabase
         .from('user_progress')
         .insert([
           { 
             user_id: userId, 
+            user_name: userName,
             total_points: 0, 
             modules_completed: 0,
             current_streak: 0,

@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { signOut } from '../services/supabase';
 import { HiTrophy, HiChartBar, HiArrowRightOnRectangle, HiAcademicCap, HiStar, HiUser, HiCalculator } from 'react-icons/hi2';
 import { getUserProgress } from '../services/progressService';
+import { updateCurrentUserName } from '../utils/updateUserNames';
 import VersionBadge from '../components/VersionBadge';
 
 const Dashboard = () => {
@@ -18,6 +19,10 @@ const Dashboard = () => {
       if (!user) return;
 
       try {
+        // Update user name in progress record
+        await updateCurrentUserName();
+        
+        // Load user progress
         const progress = await getUserProgress(user.id);
         setUserProgress(progress);
       } catch (error) {
